@@ -1,1 +1,1 @@
-"# NaxlyAIWithDotNetCore" 
+# NaxlyAIWithDotNetCore
