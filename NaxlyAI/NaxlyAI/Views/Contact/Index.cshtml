@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewData["Title"] = "Contact Us";
+    ViewData["PageName"] = "Contact";
+}
+
+@Html.Partial("PageTitle")
+
+<!-- info-section -->
+<section class="info-section alternate-2">
+    <div class="auto-container">
+        <div class="inner-container">
+            <div class="top-inner mb-55">
+                <div class="sec-title text-center">
+                    <p>Contact Information</p>
+                    <h2>We’d love to hear from you anytime</h2>
+                    <div class="decor" style="background-image: url(images/icons/decor-1.png);"></div>
+                </div>
+                <div class="text text-center">
+                    <p>Always holds in these matters to this principle of selection he rejects pleasures to secure other greater<br />pleasures, or else he endures pains to avoid</p>
+                </div>
+            </div>
+            @Html.Partial("InfoInner")
+        </div>
+    </div>
+</section>
+<!-- info-section end -->
+<!-- contact-section -->
+<section class="contact-section alternate-2">
+    <div class="pattern-layer" style="background-image: url(images/shape/shape-48.png);"></div>
+    <div class="auto-container">
+        @Html.Partial("ContactSection")
+    </div>
+</section>
+<!-- contact-section end -->
+<!-- google-map-section -->
+<section class="google-map-section">
+    <div class="map-column">
+        <div class="google-map-area">
+            <div class="google-map"
+                 id="contact-google-map"
+                 data-map-lat="40.712776"
+                 data-map-lng="-74.005974"
+                 data-icon-path="images/icons/map-marker.png"
+                 data-map-title="Brooklyn, New York, United Kingdom"
+                 data-map-zoom="12"
+                 data-markers='{
+                 "marker-1" : [40.712776, -74.005974, "<h4>Branch Office</h4><p>77/99 New York</p>" ,"assets /images/icons/map-marker.png"]
+                 }'>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- google-map-section end -->
+
