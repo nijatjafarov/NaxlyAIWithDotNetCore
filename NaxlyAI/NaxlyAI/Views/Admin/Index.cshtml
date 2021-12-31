@@ -1,0 +1,203 @@
+﻿@model NaxlyAI.Models.ViewModels.AdminHome
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div style="display: flex; margin-bottom: 10px;">
+    <h3>Home Page</h3>
+    <a style="font-size: 1.5em; margin-left: 20px;" asp-controller="Admin" asp-action="EditHomePage">Edit</a>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <tbody>
+        <tr>
+            <td>First Picture:</td>
+            <td>@Model.HomePage.FirstPicture</td>
+        </tr>
+        <tr>
+            <td>Services Information:</td>
+            <td>@Model.HomePage.AboutServices</td>
+        </tr>
+        <tr>
+            <td>Services Picture:</td>
+            <td>@Model.HomePage.ServicesPicture</td>
+        </tr>
+        <tr>
+            <td>Projects Information:</td>
+            <td>@Model.HomePage.AboutProjects</td>
+        </tr>
+        <tr>
+            <td>Work Process Information:</td>
+            <td>@Model.HomePage.AboutWorkProcess</td>
+        </tr>
+        <tr>
+            <td>Work Process First Header:</td>
+            <td>@Model.HomePage.WorkProcessHeader1</td>
+        </tr>
+        <tr>
+            <td>Work Process First Description:</td>
+            <td>@Model.HomePage.WorkProcessDesc1</td>
+        </tr>
+        <tr>
+            <td>Work Process Second Header:</td>
+            <td>@Model.HomePage.WorkProcessHeader2</td>
+        </tr>
+        <tr>
+            <td>Work Process Second Description:</td>
+            <td>@Model.HomePage.WorkProcessDesc2</td>
+        </tr>
+        <tr>
+            <td>Work Process Third Header:</td>
+            <td>@Model.HomePage.WorkProcessHeader3</td>
+        </tr>
+        <tr>
+            <td>Work Process Third Description:</td>
+            <td>@Model.HomePage.WorkProcessDesc3</td>
+        </tr>
+        <tr>
+            <td>Information About Why Choose Us:</td>
+            <td>@Model.HomePage.AboutWhyChooseUs</td>
+        </tr>
+        <tr>
+            <td>Picture About Why Choose Us:</td>
+            <td>@Model.HomePage.WhyChooseUsPicture</td>
+        </tr>
+        <tr>
+            <td>Description About Clients:</td>
+            <td>@Model.HomePage.ClientDescription</td>
+        </tr>
+    </tbody>
+</table>
+
+<div style="display: flex; margin-bottom: 10px;">
+    <h3>Configurations</h3>
+    <a style="font-size: 1.5em; margin-left: 20px;" asp-controller="Admin" asp-action="EditConfiguration">Edit</a>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <tbody>
+        <tr>
+            <td>Brand Logo:</td>
+            <td>@Model.Configuration.Logo</td>
+        </tr>
+        <tr>
+            <td>Second Logo:</td>
+            <td>@Model.Configuration.SecondLogo</td>
+        </tr>
+        <tr>
+            <td>Phone Number of Company:</td>
+            <td>@Model.Configuration.PhoneNumber</td>
+        </tr>
+        <tr>
+            <td>Slogan of Company:</td>
+            <td>@Model.Configuration.Slogan</td>
+        </tr>
+        <tr>
+            <td>Description of Company:</td>
+            <td>@Model.Configuration.Description</td>
+        </tr>
+    </tbody>
+</table>
+
+<div style="display: flex; margin-bottom: 10px;">
+    <h3>Clients</h3>
+    <a style="font-size: 1.5em; margin-left: 10px;" asp-controller="Admin" asp-action="AddClient"><i class="bi bi-plus-square"></i></a>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Logo</th>
+            <th scope="col">Show On Home Page</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var client in Model.Clients)
+        {
+            using (Html.BeginForm("DeleteClient", "Admin", new { id = client.Id }))
+            {
+                <tr>
+                    <td>@client.Name</td>
+                    <td>@client.Logo</td>
+                    <td>@client.Url</td>
+                    <td>
+                        @Html.ActionLink("Update", "UpdateClient", "Admin", new { id = client.Id }, null)
+                        <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure to delete this information?')" />
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div style="display: flex; margin-bottom: 10px;">
+    <h3>Testimonials</h3>
+    <a style="font-size: 1.5em; margin-left: 10px;" asp-controller="Admin" asp-action="AddTestimonial"><i class="bi bi-plus-square"></i></a>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Photo</th>
+            <th scope="col">Name</th>
+            <th scope="col">Review</th>
+            <th scope="col">Designation</th>
+            <th scope="col">Number of Stars</th>
+            <th scope="col">Date</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var testimonial in Model.Testimonials)
+        {
+            using (Html.BeginForm("DeleteTestimonial", "Admin", new { id = testimonial.Id }))
+            {
+                <tr>
+                    <td>@testimonial.Photo</td>
+                    <td>@testimonial.Fullname</td>
+                    <td>@testimonial.Review</td>
+                    <td>@testimonial.Designation</td>
+                    <td>@testimonial.NumberOfStars</td>
+                    <td>@testimonial.Date</td>
+                    <td>
+                        @Html.ActionLink("Update", "UpdateTestimonial", "Admin", new { id = testimonial.Id }, null)
+                        <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure to delete this information?')" />
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div style="display: flex; margin-bottom: 10px;">
+    <h3>User Messages</h3>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Message</th>
+            <th scope="col">Date</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var message in Model.UserMessages)
+        {
+            using (Html.BeginForm("DeleteUserMessage", "Admin", new { id = message.Id }))
+            {
+                <tr>
+                    <td>@message.Name</td>
+                    <td>@message.Email</td>
+                    <td>@message.Subject</td>
+                    <td>@message.Message</td>
+                    <td>@message.Date</td>
+                    <td>
+                        <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure to delete this information?')" />
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

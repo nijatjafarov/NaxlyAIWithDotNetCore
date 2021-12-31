@@ -1,0 +1,28 @@
+﻿@model NaxlyAI.Models.SocialMediaAccountOfMember
+@{
+    ViewData["Title"] = ViewData["PageDesc"];
+}
+
+<h3>@ViewData["PageDesc"]</h3>
+<form method="POST">
+    <div class="form-group">
+        <label asp-for="MemberId">Member Name</label>
+        <select asp-for="MemberId" class="custom-select"
+                asp-items="@(new SelectList(new NaxlyAIContext().TeamMembers, nameof(TeamMember.Id),
+    nameof(TeamMember.Fullname)))"></select>
+        <span asp-validation-for="MemberId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SocialMediaId">Social Media Name</label>
+        <select asp-for="SocialMediaId" class="custom-select"
+                asp-items="@(new SelectList(new NaxlyAIContext().SocialMedia, nameof(SocialMedium.Id),
+    nameof(SocialMedium.Name)))"></select>
+        <span asp-validation-for="SocialMediaId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Url">Account Url</label>
+        <input asp-for="Url" class="form-control form-control-lg" />
+        <span asp-validation-for="Url" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">@ViewData["Button"]</button>
+</form>

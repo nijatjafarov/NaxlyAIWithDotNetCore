@@ -1,7 +1,8 @@
-﻿
+﻿@model NaxlyAI.Models.Contact
 @{
     ViewData["Title"] = "Contact Us";
     ViewData["PageName"] = "Contact";
+    ViewData["PageHeader"] = Model.PageHeader;
 }
 
 @Html.Partial("PageTitle")
@@ -12,12 +13,12 @@
         <div class="inner-container">
             <div class="top-inner mb-55">
                 <div class="sec-title text-center">
-                    <p>Contact Information</p>
-                    <h2>We’d love to hear from you anytime</h2>
+                    <p>@Model.InnerHeader</p>
+                    <h2>@Model.Slogan</h2>
                     <div class="decor" style="background-image: url(images/icons/decor-1.png);"></div>
                 </div>
                 <div class="text text-center">
-                    <p>Always holds in these matters to this principle of selection he rejects pleasures to secure other greater<br />pleasures, or else he endures pains to avoid</p>
+                    <p>@Model.Description</p>
                 </div>
             </div>
             @Html.Partial("InfoInner")
@@ -53,4 +54,3 @@
     </div>
 </section>
 <!-- google-map-section end -->
-

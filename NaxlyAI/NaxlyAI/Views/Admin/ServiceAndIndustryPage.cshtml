@@ -1,0 +1,23 @@
+﻿@model NaxlyAI.Models.ServiceAndIndustry
+@{
+    ViewData["Title"] = ViewData["PageDesc"];
+}
+
+<h3>@ViewData["PageDesc"]</h3>
+<form method="POST">
+    <div class="form-group">
+        <label asp-for="ServiceId">Choose Service</label>
+        <select asp-for="ServiceId" class="custom-select"
+                asp-items="@(new SelectList(new NaxlyAIContext().Services, nameof(Service.Id),
+    nameof(Service.Name)))"></select>
+        <span asp-validation-for="ServiceId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="IndustryId">Choose Industry</label>
+        <select asp-for="IndustryId" class="custom-select"
+                asp-items="@(new SelectList(new NaxlyAIContext().Industries, nameof(Industry.Id),
+    nameof(Industry.Name)))"></select>
+        <span asp-validation-for="IndustryId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">@ViewData["Button"]</button>
+</form>

@@ -1,0 +1,32 @@
+﻿@model NaxlyAI.Models.ViewModels.ConfigurationModel
+
+<h3>@ViewData["PageDesc"]</h3>
+<form enctype="multipart/form-data" asp-controller="Admin" asp-action="EditConfiguration" method="POST">
+    <div class="form-group">
+        <label asp-for="Logo">Company Logo</label>
+        <input asp-for="Logo" class="form-control-file" />
+        <span asp-validation-for="Logo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SecondLogo">Second Logo of Company</label>
+        <input asp-for="SecondLogo" class="form-control-file" />
+        <span asp-validation-for="SecondLogo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Slogan">Company Slogan</label>
+        <input asp-for="Slogan" class="form-control form-control-lg" />
+        <span asp-validation-for="Slogan" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Company Description</label>
+        <input asp-for="Description" class="form-control form-control-lg" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneNumber">Phone Number of Company</label>
+        <input asp-for="PhoneNumber" class="form-control form-control-lg" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">@ViewData["Button"]</button>
+</form>
+

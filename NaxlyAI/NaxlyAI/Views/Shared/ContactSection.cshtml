@@ -1,28 +1,27 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@{ 
+    UserMessage userMessage = new UserMessage();
+}
 
-<div class="row clearfix">
+<div class="row clearfix" action="Contact/Index">
     <div class="col-lg-6 col-md-12 col-sm-12 content-column">
         <div id="content_block_09">
             <div class="content-box">
-                <form method="post" action="~/inc/sendemail.php" id="contact-form" class="default-form">
+                <form method="post" id="contact-form" class="default-form">
                     <div class="form-group">
                         <label><i class="far fa-user"></i>Your Name</label>
-                        <input type="text" name="username" placeholder="Enter name here" required="">
+                        <input asp-for="@userMessage.Name" placeholder="Enter name here" required="">
                     </div>
                     <div class="form-group">
                         <label><i class="far fa-envelope"></i>Email Address</label>
-                        <input type="email" name="email" placeholder="Email Address" required="">
+                        <input type="email" asp-for="@userMessage.Email" placeholder="Email Address" required="">
                     </div>
                     <div class="form-group">
                         <label><i class="far fa-user"></i>Subject</label>
-                        <input type="text" name="subject" placeholder="Subject" required="">
+                        <input asp-for="@userMessage.Subject" placeholder="Subject" required="">
                     </div>
                     <div class="form-group">
                         <label><i class="fas fa-text-height"></i>Message</label>
-                        <textarea name="message" placeholder="Message goes here"></textarea>
+                        <textarea asp-for="@userMessage.Message" placeholder="Message goes here"></textarea>
                     </div>
                     <div class="form-group">
                         <button class="theme-btn style-one" type="submit" name="submit-form">Send Your Message</button>
@@ -33,7 +32,8 @@
     </div>
     <div class="col-lg-6 col-md-12 col-sm-12 image-column">
         <div class="image-box wow slideInRight" data-wow-delay="00ms" data-wow-duration="1500ms">
-            <figure class="image js-tilt"><img src="~/images/resource/illastration-6.png" alt=""></figure>
+            <figure class="image js-tilt"><img src="~/images/@(new NaxlyAIContext().Contacts.
+        FirstOrDefault().PagePicture)" alt=""></figure>
         </div>
     </div>
 </div>

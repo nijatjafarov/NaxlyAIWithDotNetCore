@@ -1,0 +1,25 @@
+﻿@model NaxlyAI.Models.ViewModels.ClientModel
+@{ 
+    ViewData["Title"] = ViewData["PageDesc"];
+}
+
+<h3>@ViewData["PageDesc"]</h3>
+<form enctype="multipart/form-data" method="POST">
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" class="form-control form-control-lg" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Logo">Company Logo</label>
+        <input asp-for="Logo" class="form-control-file" />
+        <span asp-validation-for="Logo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Url">Client URL</label>
+        <input asp-for="Url" class="form-control form-control-lg" />
+        <span asp-validation-for="Url" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">@ViewData["Button"]</button>
+</form>
+

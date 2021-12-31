@@ -1,0 +1,214 @@
+﻿@model NaxlyAI.Models.ViewModels.AdminServices
+@{
+    ViewData["Title"] = "Services";
+}
+
+<div style="display: flex; margin-bottom: 10px;">
+    <h3>Services Page</h3>
+    <a style="font-size: 1.5em; margin-left: 20px;" asp-controller="Admin" asp-action="EditServicesPage">Edit</a>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <tbody>
+        <tr>
+            <td>Services Page Header:</td>
+            <td>@Model.ServicesPage.PageHeader</td>
+        </tr>
+        <tr>
+            <td>Services Explanation:</td>
+            <td>@Model.ServicesPage.Explanation</td>
+        </tr>
+        <tr>
+            <td>Explanation About Industries:</td>
+            <td>@Model.ServicesPage.ExplanationAboutIndustries</td>
+        </tr>
+        <tr>
+            <td>Video URL:</td>
+            <td>@Model.ServicesPage.VideoUrl</td>
+        </tr>
+        <tr>
+            <td>Text of Award Section:</td>
+            <td>@Model.ServicesPage.AwardText</td>
+        </tr>
+        <tr>
+            <td>Picture of Award Section:</td>
+            <td>@Model.ServicesPage.AwardPicture</td>
+        </tr>
+        <tr>
+            <td>Description of Award Section:</td>
+            <td>@Model.ServicesPage.AwardDescription</td>
+        </tr>
+    </tbody>
+</table>
+
+<div style="display: flex; margin-bottom: 10px;">
+    <h3>Services</h3>
+    <a style="font-size: 1.5em; margin-left: 10px;" asp-controller="Admin" asp-action="AddService"><i class="bi bi-plus-square"></i></a>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Intro</th>
+            <th scope="col">Description</th>
+            <th scope="col">Subservices Section Header</th>
+            <th scope="col">Technologies Section Header</th>
+            <th scope="col">Applications Section Header</th>
+            <th scope="col">Projects Section Header</th>
+            <th scope="col">Service Icon</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var service in Model.Services)
+        {
+            using (Html.BeginForm("DeleteService", "Admin", new { id = service.Id }))
+            {
+                <tr>
+                    <td>@service.Name</td>
+                    <td>@service.Intro</td>
+                    <td>@service.Description</td>
+                    <td>@service.SubservicesHeader</td>
+                    <td>@service.TechnologiesHeader</td>
+                    <td>@service.ApplicationHeader</td>
+                    <td>@service.ProjectsHeader</td>
+                    <td>@service.Icon</td>
+                    <td>
+                        @Html.ActionLink("Update", "UpdateService", "Admin", new { id = service.Id }, null)
+                        @Html.ActionLink("Details", "ServiceDetails", "Admin", new { id = service.Id }, null)
+                        <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure to delete this information?')" />
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div style="display: flex; margin-bottom: 10px;">
+    <h3>Subservices Of Services</h3>
+    <a style="font-size: 1.5em; margin-left: 10px;" asp-controller="Admin" asp-action="AddSubserviceForService"><i class="bi bi-plus-square"></i></a>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Icon</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Type</th>
+            <th scope="col">Parent Service</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var subservice in Model.Subservices)
+        {
+            using (Html.BeginForm("DeleteSubserviceForService", "Admin", new { id = subservice.Id }))
+            {
+                <tr>
+                    <td>@subservice.Icon</td>
+                    <td>@subservice.Name</td>
+                    <td>@subservice.Description</td>
+                    <td>@subservice.Type</td>
+                    <td>@subservice.Service.Name</td>
+                    <td>
+                        @Html.ActionLink("Update", "UpdateSubserviceForService", "Admin", new { id = subservice.Id }, null)
+                        <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure to delete this information?')" />
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div style="display: flex; margin-bottom: 10px;">
+    <h3>Files of Services</h3>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Parent Service</th>
+            <th scope="col">Name</th>
+            <th scope="col">Extention</th>
+            <th scope="col">Size</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var file in Model.ServiceFiles)
+        {
+            using (Html.BeginForm("DeleteFileForService", "Admin", new { id = file.Id }))
+            {
+            <tr>
+                <td>@file.Service.Name</td>
+                <td>@file.Name</td>
+                <td>@file.Extention</td>
+                <td>@file.Size Kb</td>
+                <td>
+                    <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure to delete this information?')" />
+                </td>
+            </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div style="display: flex; margin-bottom: 10px;">
+    <h3>Industries</h3>
+    <a style="font-size: 1.5em; margin-left: 10px;" asp-controller="Admin" asp-action="AddIndustry"><i class="bi bi-plus-square"></i></a>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Icon class</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var industry in Model.Industries)
+        {
+            using (Html.BeginForm("DeleteIndustry", "Admin", new { id = industry.Id }))
+            {
+                <tr>
+                    <td>@industry.Name</td>
+                    <td>@industry.Description</td>
+                    <td>@industry.Icon</td>
+                    <td>
+                        @Html.ActionLink("Update", "UpdateIndustry", "Admin", new { id = industry.Id }, null)
+                        <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure to delete this information?')" />
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div style="display: flex; margin-bottom: 10px;">
+    <h3>Technologies</h3>
+    <a style="font-size: 1.5em; margin-left: 10px;" asp-controller="Admin" asp-action="AddTech"><i class="bi bi-plus-square"></i></a>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Icon class</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tech in Model.Technologies)
+        {
+            using (Html.BeginForm("DeleteTech", "Admin", new { id = tech.Id }))
+            {
+                <tr>
+                    <td>@tech.Name</td>
+                    <td>@tech.Picture</td>
+                    <td>
+                        @Html.ActionLink("Update", "UpdateTech", "Admin", new { id = tech.Id }, null)
+                        <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure to delete this information?')" />
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

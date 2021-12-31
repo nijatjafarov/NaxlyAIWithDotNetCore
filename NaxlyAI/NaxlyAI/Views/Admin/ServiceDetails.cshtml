@@ -1,0 +1,115 @@
+﻿@model NaxlyAI.Models.ViewModels.ServiceDetails
+
+<h3>@ViewData["PageDesc"]</h3>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <tbody>
+        <tr>
+            <td>Name:</td>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <td>Page Header:</td>
+            <td>@Model.PageHeader</td>
+        </tr>
+        <tr>
+            <td>Intro Text:</td>
+            <td>@Model.Intro</td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td>@Model.Description</td>
+        </tr>
+        <tr>
+            <td>URL of Start Your Project:</td>
+            <td>@Model.StartYourProjectUrl</td>
+        </tr>
+        <tr>
+            <td>First Picture:</td>
+            <td>@Model.FirstPicture</td>
+        </tr>
+        <tr>
+            <td>Header of Subservices Section:</td>
+            <td>@Model.SubservicesHeader</td>
+        </tr>
+        <tr>
+            <td>Description of Subservices Section:</td>
+            <td>@Model.SubservicesDescription</td>
+        </tr>
+        <tr>
+            <td>Header of Technologies Section:</td>
+            <td>@Model.TechnologiesHeader</td>
+        </tr>
+        <tr>
+            <td>Description of Technologies Section:</td>
+            <td>@Model.TechnologiesDescription</td>
+        </tr>
+        <tr>
+            <td>Header of Applications Section:</td>
+            <td>@Model.ApplicationHeader</td>
+        </tr>
+        <tr>
+            <td>Description of Applications Section:</td>
+            <td>@Model.ApplicationDescription</td>
+        </tr>
+        <tr>
+            <td>Second Picture:</td>
+            <td>@Model.SecondPicture</td>
+        </tr>
+        <tr>
+            <td>Header of Projects Section:</td>
+            <td>@Model.ProjectsHeader</td>
+        </tr>
+        <tr>
+            <td>Cover Picture:</td>
+            <td>@Model.CoverPicture</td>
+        </tr>
+        <tr>
+            <td>Service Icon:</td>
+            <td>@Model.Icon</td>
+        </tr>
+        <tr>
+            <td>Subfield Names:</td>
+            <td>
+                @foreach (string subfield in Model.SubfieldNames)
+                {
+                    @subfield <br />
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>Technology Names:</td>
+            <td>
+                @foreach (string tech in Model.TechNames)
+                {
+                    @tech <br />
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>Industry Names:</td>
+            <td>
+                @foreach (string industry in Model.IndustryNames)
+                {
+                    @industry <br />
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>File Names:</td>
+            <td>
+                @foreach (string file in Model.FileNames)
+                {
+                    @file <br />
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>Header of Contact Section:</td>
+            <td>@Model.ContactHeader</td>
+        </tr>
+        <tr>
+            <td>Description of Contact Section:</td>
+            <td>@Model.ContactDescription</td>
+        </tr>
+    </tbody>
+</table>

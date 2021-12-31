@@ -1,0 +1,87 @@
+﻿@model NaxlyAI.Models.ViewModels.EditContact
+
+<h3>@ViewData["PageDesc"]</h3>
+<form enctype="multipart/form-data" asp-controller="Admin" asp-action="EditContactPage" method="POST">
+    <div class="form-group">
+        <label asp-for="PageHeader">Page Header</label>
+        <input asp-for="PageHeader" class="form-control form-control-lg" />
+        <span asp-validation-for="PageHeader" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="InnerHeader">Inner Header</label>
+        <input asp-for="InnerHeader" class="form-control form-control-lg" />
+        <span asp-validation-for="InnerHeader" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Slogan">Slogan</label>
+        <input asp-for="Slogan" class="form-control form-control-lg" />
+        <span asp-validation-for="Slogan" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Company Description</label>
+        <input asp-for="Description" class="form-control form-control-lg" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LocationHeader">Location Section Header</label>
+        <input asp-for="LocationHeader" class="form-control form-control-lg" />
+        <span asp-validation-for="LocationHeader" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LocationDesc">Location Section Description</label>
+        <input asp-for="LocationDesc" class="form-control form-control-lg" />
+        <span asp-validation-for="LocationDesc" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address">Address</label>
+        <input asp-for="Address" class="form-control form-control-lg" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneHeader">Phone Section Header</label>
+        <input asp-for="PhoneHeader" class="form-control form-control-lg" />
+        <span asp-validation-for="PhoneHeader" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneDesc">Phone Section Description</label>
+        <input asp-for="PhoneDesc" class="form-control form-control-lg" />
+        <span asp-validation-for="PhoneDesc" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneNum">Phone Number</label>
+        <input asp-for="PhoneNum" class="form-control form-control-lg" />
+        <span asp-validation-for="PhoneNum" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneTime">Phone Time</label>
+        <input asp-for="PhoneTime" class="form-control form-control-lg" />
+        <span asp-validation-for="PhoneTime" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EmailHeader">Email Section Header</label>
+        <input asp-for="EmailHeader" class="form-control form-control-lg" />
+        <span asp-validation-for="EmailHeader" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EmailDesc">Email Section Description</label>
+        <input asp-for="EmailDesc" class="form-control form-control-lg" />
+        <span asp-validation-for="EmailDesc" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email1">First Email Address</label>
+        <input type="email" asp-for="Email1" class="form-control form-control-lg" />
+        <span asp-validation-for="Email1" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email2">Second Email Address</label>
+        <input type="email" asp-for="Email2" class="form-control form-control-lg" />
+        <span asp-validation-for="Email2" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PagePicture">Page Picture</label>
+        <input asp-for="PagePicture" class="form-control-file" />
+        <span asp-validation-for="PagePicture" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">@ViewData["Button"]</button>
+</form>
+

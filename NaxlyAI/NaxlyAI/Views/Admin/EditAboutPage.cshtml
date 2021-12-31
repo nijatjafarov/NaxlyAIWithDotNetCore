@@ -1,0 +1,82 @@
+﻿@model NaxlyAI.Models.ViewModels.EditAbout
+
+<h3>@ViewData["PageDesc"]</h3>
+<form enctype="multipart/form-data" asp-controller="Admin" asp-action="EditAboutPage" method="POST">
+    <div class="form-group">
+        <label asp-for="PageHeader">Page Header</label>
+        <input asp-for="PageHeader" class="form-control form-control-lg" />
+        <span asp-validation-for="PageHeader" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Slogan">Slogan</label>
+        <input asp-for="Slogan" class="form-control form-control-lg" />
+        <span asp-validation-for="Slogan" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Company Description</label>
+        <input asp-for="Description" class="form-control form-control-lg" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="VideoTitle">Video Title About Company</label>
+        <input asp-for="VideoTitle" class="form-control form-control-lg" />
+        <span asp-validation-for="VideoTitle" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="VideoUrl">Video URL</label>
+        <input asp-for="VideoUrl" class="form-control form-control-lg" />
+        <span asp-validation-for="VideoUrl" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FoundationYear">Foundation Year</label>
+        <input type="number" min="1900" max="@DateTime.Now.Year" asp-for="FoundationYear" class="form-control form-control-lg" />
+        <span asp-validation-for="FoundationYear" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Picture1">First Picture</label>
+        <input asp-for="Picture1"  class="form-control-file"/>
+        <span asp-validation-for="Picture1" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Picture2">Second Picture</label>
+        <input asp-for="Picture2"  class="form-control-file"/>
+        <span asp-validation-for="Picture2" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Picture3">Third Picture</label>
+        <input asp-for="Picture3"  class="form-control-file"/>
+        <span asp-validation-for="Picture3" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AboutOurHistory">About Our History</label>
+        <input asp-for="AboutOurHistory" class="form-control form-control-lg" />
+        <span asp-validation-for="AboutOurHistory" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="WhyChooseUs">Why Choose Us Description</label>
+        <input asp-for="WhyChooseUs" class="form-control form-control-lg" />
+        <span asp-validation-for="WhyChooseUs" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="WhyChooseUsPicture1">Why Choose Us First Picture</label>
+        <input asp-for="WhyChooseUsPicture1"  class="form-control-file"/>
+        <span asp-validation-for="WhyChooseUsPicture1" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="WhyChooseUsPicture2">Why Choose Us Second Picture</label>
+        <input asp-for="WhyChooseUsPicture2"  class="form-control-file"/>
+        <span asp-validation-for="WhyChooseUsPicture2" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TeamMemberDesc">Team Members Description</label>
+        <input asp-for="TeamMemberDesc" class="form-control form-control-lg" />
+        <span asp-validation-for="TeamMemberDesc" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="HomeCoverPicture">Home Page Cover Picture</label>
+        <input asp-for="HomeCoverPicture"  class="form-control-file"/>
+        <span asp-validation-for="HomeCoverPicture" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">@ViewData["Button"]</button>
+</form>
+

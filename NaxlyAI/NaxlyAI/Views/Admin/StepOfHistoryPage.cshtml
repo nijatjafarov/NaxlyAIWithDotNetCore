@@ -1,0 +1,25 @@
+﻿@model NaxlyAI.Models.StepOfHistory
+@{
+    ViewData["Title"] = ViewData["PageDesc"];
+}
+
+<h3>@ViewData["PageDesc"]</h3>
+<form enctype="multipart/form-data" method="POST">
+    <div class="form-group">
+        <label asp-for="Header">Header for Step</label>
+        <input asp-for="Header" class="form-control form-control-lg" />
+        <span asp-validation-for="Header" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description of Step</label>
+        <input asp-for="Description" class="form-control form-control-lg" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Year">Year of Step</label>
+        <input min="1900" max="@DateTime.Now.Year" asp-for="Year" class="form-control form-control-lg" />
+        <span asp-validation-for="Year" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">@ViewData["Button"]</button>
+</form>
+

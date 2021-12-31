@@ -1,0 +1,123 @@
+﻿@model NaxlyAI.Models.ViewModels.ServiceModel
+@{
+    ViewData["Title"] = ViewData["PageDesc"];
+}
+
+<h3>@ViewData["PageDesc"]</h3>
+<form enctype="multipart/form-data" method="POST">
+    <div class="form-group">
+        <label asp-for="Name">Service Name</label>
+        <input asp-for="Name" class="form-control form-control-lg" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PageHeader">Service Page Header</label>
+        <input asp-for="PageHeader" class="form-control form-control-lg" />
+        <span asp-validation-for="PageHeader" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Intro">Intro</label>
+        <input asp-for="Intro" class="form-control form-control-lg" />
+        <span asp-validation-for="Intro" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Service Description</label>
+        <input asp-for="Description" class="form-control form-control-lg" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="StartYourProjectUrl">Start Your Project URL</label>
+        <input asp-for="StartYourProjectUrl" class="form-control form-control-lg" />
+        <span asp-validation-for="StartYourProjectUrl" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FirstPicture">First Picture</label>
+        <input asp-for="FirstPicture" class="form-control-file" />
+        <span asp-validation-for="FirstPicture" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SubservicesHeader">Subservices Section Header</label>
+        <input asp-for="SubservicesHeader" class="form-control form-control-lg" />
+        <span asp-validation-for="SubservicesHeader" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SubservicesDescription">Subservices Section Description</label>
+        <input asp-for="SubservicesDescription" class="form-control form-control-lg" />
+        <span asp-validation-for="SubservicesDescription" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TechnologiesHeader">Technologies Section Header</label>
+        <input asp-for="TechnologiesHeader" class="form-control form-control-lg" />
+        <span asp-validation-for="TechnologiesHeader" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TechnologiesDescription">Technologies Section Description</label>
+        <input asp-for="TechnologiesDescription" class="form-control form-control-lg" />
+        <span asp-validation-for="TechnologiesDescription" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SecondPicture">Second Picture</label>
+        <input asp-for="SecondPicture" class="form-control-file" />
+        <span asp-validation-for="SecondPicture" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ApplicationHeader">Applications Section Header</label>
+        <input asp-for="ApplicationHeader" class="form-control form-control-lg" />
+        <span asp-validation-for="ApplicationHeader" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ApplicationDescription">Applications Section Description</label>
+        <input asp-for="ApplicationDescription" class="form-control form-control-lg" />
+        <span asp-validation-for="ApplicationDescription" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ProjectsHeader">Projects Section Header</label>
+        <input asp-for="ProjectsHeader" class="form-control form-control-lg" />
+        <span asp-validation-for="ProjectsHeader" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CoverPicture">Cover Picture</label>
+        <input asp-for="CoverPicture" class="form-control-file" />
+        <span asp-validation-for="CoverPicture" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Icon">Service Icon</label>
+        <input asp-for="Icon" class="form-control form-control-lg" />
+        <span asp-validation-for="Icon" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="IndustryIds">Choose Industries</label>
+        <select asp-for="IndustryIds" class="custom-select"
+                asp-items="@(new SelectList(new NaxlyAIContext().Industries, nameof(Industry.Id),
+    nameof(Industry.Name)))" multiple></select>
+        <span asp-validation-for="IndustryIds" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TechIds">Choose Technologies</label>
+        <select asp-for="TechIds" class="custom-select"
+                asp-items="@(new SelectList(new NaxlyAIContext().Technologies, nameof(Technology.Id),
+    nameof(Technology.Name)))" multiple></select>
+        <span asp-validation-for="TechIds" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SubfieldString">Enter Subfields (Separate by ';' symbol)</label>
+        <input asp-for="SubfieldString" class="form-control form-control-lg" />
+        <span asp-validation-for="SubfieldString" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Files">Choose Files for Service</label>
+        <input multiple asp-for="Files" class="form-control-file" />
+        <span asp-validation-for="Files" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ContactHeader">Contact Section Header</label>
+        <input asp-for="ContactHeader" class="form-control form-control-lg" />
+        <span asp-validation-for="ContactHeader" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ContactDescription">Contact Section Description</label>
+        <input asp-for="ContactDescription" class="form-control form-control-lg" />
+        <span asp-validation-for="ContactDescription" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">@ViewData["Button"]</button>
+</form>

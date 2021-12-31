@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NaxlyAI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +9,18 @@ namespace NaxlyAI.Controllers
 {
     public class ProjectsController : Controller
     {
+        NaxlyAIContext context = new NaxlyAIContext();
         public IActionResult Index()
         {
-            return View();
+            var team = context.Projects;
+            return View(team);
         }
 
-        public IActionResult Project_Details()
+        public IActionResult Project_Details(int id)
         {
-            return View();
+            Project project = context.Projects.Find(id);
+
+            return View(project);
         }
     }
 }

@@ -1,30 +1,30 @@
 ﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+@{ 
+    HomePage home = new NaxlyAIContext().HomePages.FirstOrDefault();
+}
 
-<section class="process-style-two" style="background-image: url(~/images/background/process-bg-1.jpg);">
+<section class="process-style-two" style="background-image: url(/images/background/process-bg-1.jpg);">
     <div class="auto-container">
         <div class="sec-title text-center style-two">
             <p>Our Work Process</p>
-            <h2>Simple & clean work process</h2>
-            <div class="decor" style="background-image: url(~/images/icons/decor-1.png);"></div>
+            <h2>@home.AboutWorkProcess</h2>
+            <div class="decor" style="background-image: url(/images/icons/decor-1.png);"></div>
         </div>
         <div class="inner-content">
-            <div class="line" style="background-image: url(~/images/icons/line-1.png);"></div>
+            <div class="line" style="background-image: url(/images/icons/line-1.png);"></div>
             <div class="row clearfix">
                 <div class="col-lg-4 col-md-6 col-sm-12 work-block">
                     <div class="work-block-two">
                         <div class="inner-box">
-                            <div class="arrow-box" style="background-image: url(~/images/icons/arrow-1.png);"></div>
+                            <div class="arrow-box" style="background-image: url(/images/icons/arrow-1.png);"></div>
                             <div class="icon-box">
-                                <div class="border-line" style="background-image: url(~/images/icons/border-1.png);"></div>
+                                <div class="border-line" style="background-image: url(/images/icons/border-1.png);"></div>
                                 <i class="flaticon-big-data"></i>
                             </div>
                             <div class="count-box wow zoomIn animated" data-wow-delay="00ms" data-wow-duration="1500ms"><span>01</span></div>
                             <div class="content-box wow slideInUp" data-wow-delay="00ms" data-wow-duration="1500ms">
-                                <h4><a href="index-2.html">Frame the Problem</a></h4>
-                                <p>To take a trivial example, which idea of ever undertakes.</p>
+                                <h4><a href="index-2.html">@home.WorkProcessHeader1</a></h4>
+                                <p>@home.WorkProcessDesc1</p>
                             </div>
                         </div>
                     </div>
@@ -32,15 +32,15 @@
                 <div class="col-lg-4 col-md-6 col-sm-12 work-block">
                     <div class="work-block-two">
                         <div class="inner-box">
-                            <div class="arrow-box" style="background-image: url(~/images/icons/arrow-1.png);"></div>
+                            <div class="arrow-box" style="background-image: url(/images/icons/arrow-1.png);"></div>
                             <div class="icon-box">
-                                <div class="border-line" style="background-image: url(~/images/icons/border-1.png);"></div>
+                                <div class="border-line" style="background-image: url(/images/icons/border-1.png);"></div>
                                 <i class="flaticon-ui"></i>
                             </div>
                             <div class="count-box wow zoomIn animated" data-wow-delay="200ms" data-wow-duration="1500ms"><span>02</span></div>
                             <div class="content-box wow slideInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
-                                <h4><a href="index-2.html">Collect the Data</a></h4>
-                                <p>Best every pleasure is too welcomed every pain avoided.</p>
+                                <h4><a href="index-2.html">@home.WorkProcessHeader2</a></h4>
+                                <p>@home.WorkProcessDesc2</p>
                             </div>
                         </div>
                     </div>
@@ -49,13 +49,13 @@
                     <div class="work-block-two">
                         <div class="inner-box">
                             <div class="icon-box">
-                                <div class="border-line" style="background-image: url(~/images/icons/border-1.png);"></div>
+                                <div class="border-line" style="background-image: url(/images/icons/border-1.png);"></div>
                                 <i class="flaticon-brain"></i>
                             </div>
                             <div class="count-box wow zoomIn animated" data-wow-delay="400ms" data-wow-duration="1500ms"><span>03</span></div>
                             <div class="content-box wow slideInUp" data-wow-delay="400ms" data-wow-duration="1500ms">
-                                <h4><a href="index-2.html">Process the Data</a></h4>
-                                <p>Have to be repudiated annoyances accepted the wise.</p>
+                                <h4><a href="index-2.html">@home.WorkProcessHeader3</a></h4>
+                                <p>@home.WorkProcessDesc3</p>
                             </div>
                         </div>
                     </div>

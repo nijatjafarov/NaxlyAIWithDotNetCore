@@ -1,0 +1,31 @@
+﻿@model NaxlyAI.Models.ViewModels.ProjectStepModel
+@{
+    ViewData["Title"] = ViewData["PageDesc"];
+}
+
+<h3>@ViewData["PageDesc"]</h3>
+<form method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="ProjectId">Choose Parent Project</label>
+        <select asp-for="ProjectId" class="custom-select"
+                asp-items="@(new SelectList(new NaxlyAIContext().Projects, nameof(Project.Id),
+    nameof(Project.Name)))"></select>
+        <span asp-validation-for="ProjectId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Name">Step Name</label>
+        <input asp-for="Name" class="form-control form-control-lg" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Picture">Choose a Picture</label>
+        <input asp-for="Picture" class="form-control-file" />
+        <span asp-validation-for="Picture" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <input asp-for="Description" class="form-control form-control-lg" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">@ViewData["Button"]</button>
+</form>

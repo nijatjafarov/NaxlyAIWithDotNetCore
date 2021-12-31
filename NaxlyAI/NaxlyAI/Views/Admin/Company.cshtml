@@ -1,0 +1,244 @@
+﻿@model NaxlyAI.Models.ViewModels.AdminCompany
+@{
+    ViewData["Title"] = "Admin Company";
+}
+
+
+<div style="display: flex; margin-bottom: 10px;">
+    <h3>About Page</h3>
+    <a style="font-size: 1.5em; margin-left: 20px;" asp-controller="Admin" asp-action="EditAboutPage">Edit</a>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <tbody>
+        <tr>
+            <td>Page Header:</td>
+            <td>@Model.AboutPage.PageHeader</td>
+        </tr>
+        <tr>
+            <td>Slogan:</td>
+            <td>@Model.AboutPage.Slogan</td>
+        </tr>
+        <tr>
+            <td>Company Description:</td>
+            <td>@Model.AboutPage.Description</td>
+        </tr>
+        <tr>
+            <td>Video Title About Company:</td>
+            <td>@Model.AboutPage.VideoTitle</td>
+        </tr>
+        <tr>
+            <td>Video URL About Company:</td>
+            <td>@Model.AboutPage.VideoUrl</td>
+        </tr>
+        <tr>
+            <td>Foundation Year:</td>
+            <td>@Model.AboutPage.FoundationYear</td>
+        </tr>
+        <tr>
+            <td>First Picture:</td>
+            <td>@Model.AboutPage.Picture1</td>
+        </tr>
+        <tr>
+            <td>Second Picture:</td>
+            <td>@Model.AboutPage.Picture2</td>
+        </tr>
+        <tr>
+            <td>Third Picture:</td>
+            <td>@Model.AboutPage.Picture3</td>
+        </tr>
+        <tr>
+            <td>About Our History:</td>
+            <td>@Model.AboutPage.AboutOurHistory</td>
+        </tr>
+        <tr>
+            <td>Why Choose Us Description:</td>
+            <td>@Model.AboutPage.WhyChooseUs</td>
+        </tr>
+        <tr>
+            <td>First Picture About Why Choose Us:</td>
+            <td>@Model.AboutPage.WhyChooseUsPicture1</td>
+        </tr>
+        <tr>
+            <td>Second Picture About Why Choose Us:</td>
+            <td>@Model.AboutPage.WhyChooseUsPicture2</td>
+        </tr>
+        <tr>
+            <td>Team Members Description:</td>
+            <td>@Model.AboutPage.TeamMemberDesc</td>
+        </tr>
+        <tr>
+            <td>Home Page Cover Picture:</td>
+            <td>@Model.AboutPage.HomeCoverPicture</td>
+        </tr>
+    </tbody>
+</table>
+
+<div style="display: flex; margin-bottom: 10px;">
+    <h3>Steps of Our History</h3>
+    <a style="font-size: 1.5em; margin-left: 10px;" asp-controller="Admin" asp-action="AddStepOfHistory"><i class="bi bi-plus-square"></i></a>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Header of Step</th>
+            <th scope="col">Description of Step</th>
+            <th scope="col">Year of Step</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var step in Model.StepsOfHistory)
+        {
+            using (Html.BeginForm("DeleteStepOfHistory", "Admin", new { id = step.Id }))
+            {
+                <tr>
+                    <td>@step.Header</td>
+                    <td>@step.Description</td>
+                    <td>@step.Year</td>
+                    <td>
+                        @Html.ActionLink("Update", "UpdateStepOfHistory", "Admin", new { id = step.Id }, null)
+                        <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure to delete this information?')" />
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+<div style="display: flex; margin-bottom: 10px;">
+    <h3>Contact Page</h3>
+    <a style="font-size: 1.5em; margin-left: 20px;" asp-controller="Admin" asp-action="EditContactPage">Edit</a>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <tbody>
+        <tr>
+            <td>Page Header:</td>
+            <td>@Model.ContactPage.PageHeader</td>
+        </tr>
+        <tr>
+            <td>Inner Header:</td>
+            <td>@Model.ContactPage.InnerHeader</td>
+        </tr>
+        <tr>
+            <td>Slogan:</td>
+            <td>@Model.ContactPage.Slogan</td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td>@Model.ContactPage.Description</td>
+        </tr>
+        <tr>
+            <td>Location Header:</td>
+            <td>@Model.ContactPage.LocationHeader</td>
+        </tr>
+        <tr>
+            <td>Location Description:</td>
+            <td>@Model.ContactPage.LocationDesc</td>
+        </tr>
+        <tr>
+            <td>Addresss:</td>
+            <td>@Model.ContactPage.Address</td>
+        </tr>
+        <tr>
+            <td>Header of Phone Section:</td>
+            <td>@Model.ContactPage.PhoneHeader</td>
+        </tr>
+        <tr>
+            <td>Description of Phone Section:</td>
+            <td>@Model.ContactPage.PhoneDesc</td>
+        </tr>
+        <tr>
+            <td>Phone Number:</td>
+            <td>@Model.ContactPage.PhoneNum</td>
+        </tr>
+        <tr>
+            <td>Phone Time:</td>
+            <td>@Model.ContactPage.PhoneTime</td>
+        </tr>
+        <tr>
+            <td>Email Section Header:</td>
+            <td>@Model.ContactPage.EmailHeader</td>
+        </tr>
+        <tr>
+            <td>Email Section Description:</td>
+            <td>@Model.ContactPage.EmailDesc</td>
+        </tr>
+        <tr>
+            <td>First Email Address:</td>
+            <td>@Model.ContactPage.Email1</td>
+        </tr>
+        <tr>
+            <td>Second Email Address:</td>
+            <td>@Model.ContactPage.Email2</td>
+        </tr>
+        <tr>
+            <td>Page Picture:</td>
+            <td>@Model.ContactPage.PagePicture</td>
+        </tr>
+    </tbody>
+</table>
+
+<div style="display: flex; margin-bottom: 10px;">
+    <h3>Reasons for Choosing Us</h3>
+    <a style="font-size: 1.5em; margin-left: 10px;" asp-controller="Admin" asp-action="AddReasonToChooseUs"><i class="bi bi-plus-square"></i></a>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Header of Reason</th>
+            <th scope="col">Description of Reason</th>
+            <th scope="col">Icon of Reason</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reason in Model.ReasonsToChooseUs)
+        {
+            using (Html.BeginForm("DeleteReasonToChooseUs", "Admin", new { id = reason.Id }))
+            {
+                <tr>
+                    <td>@reason.Header</td>
+                    <td>@reason.Descrioption</td>
+                    <td>@reason.Icon</td>
+                    <td>
+                        @Html.ActionLink("Update", "UpdateReasonToChooseUs", "Admin", new { id = reason.Id }, null)
+                        <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure to delete this information?')" />
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div style="display: flex; margin-bottom: 10px;">
+    <h3>Social Media Accounts of Company</h3>
+    <a style="font-size: 1.5em; margin-left: 10px;" asp-controller="Admin" asp-action="AddCompanySM"><i class="bi bi-plus-square"></i></a>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Social Media Name</th>
+            <th scope="col">Social Media Icon</th>
+            <th scope="col">Social Media Url</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sm in Model.SocialMediasOfCompany)
+        {
+            using (Html.BeginForm("DeleteCompanySM", "Admin", new { id = sm.Id }))
+            {
+                <tr>
+                    <td>@sm.Name</td>
+                    <td>@sm.Icon</td>
+                    <td>@sm.Url</td>
+                    <td>
+                        @Html.ActionLink("Update", "UpdateCompanySM", "Admin", new { id = sm.Id }, null)
+                        <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure to delete this information?')" />
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

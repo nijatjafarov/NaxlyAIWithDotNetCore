@@ -1,7 +1,8 @@
-﻿
+﻿@model NaxlyAI.Models.ViewModels.AppServices
 @{
     ViewData["Title"] = "Services";
-    ViewData["PageName"] = "Services";
+    ViewData["PageHeader"] = "Our Services";
+
 }
 
 @Html.Partial("PageTitle")
@@ -10,70 +11,45 @@
 <section class="service-section-five">
     <div class="auto-container">
         <div class="sec-title text-center mb-60">
-            <p>More than Solutions</p>
-            <h2>Data sceince solutions for startup<br />and enterprises</h2>
+            <p>@Model.ServicesPage.PageHeader</p>
+            <h2>@Model.ServicesPage.Explanation</h2>
             <div class="decor" style="background-image: url(images/icons/decor-1.png);"></div>
         </div>
         <div class="row clearfix">
-            <div class="col-lg-6 col-md-6 col-sm-12 block-column">
-                <div class="service-block-five wow fadeInLeft" data-wow-delay="00ms" data-wow-duration="1500ms">
+            <div style="display:contents;" class="col-lg-12 col-md-12 col-sm-12 block-column">
+            @{
+                int index = 0;
+            }
+            @foreach (Service service in Model.Services)
+            {
+                string divClass = index % 2 == 0 ? "fadeInLeft" : "fadeInRight";
+                var fields = new NaxlyAIContext().SubfieldOfServices.Where(s => s.ServiceId == service.Id);
+                <div class="service-block-five wow @divClass col-lg-6 col-md-6 col-sm-12" data-wow-delay="00ms" data-wow-duration="1500ms">
                     <div class="inner-box">
-                        <div class="icon-box"><i class="flaticon-data"></i></div>
-                        <h3><a href="service-details.html">Data Science</a></h3>
+                        <div class="icon-box"><i class="@service.Icon"></i></div>
+                        <h3>
+                            <a asp-controller="Services" asp-action="Service_Details" asp-route-id="@service.Id">
+                                @service.Name
+                            </a>
+                        </h3>
                         <ul class="list-item clearfix">
-                            <li><span class="dots"></span>NLP & Text Analysis</li>
-                            <li><span class="dots"></span>Business Task Analysis</li>
-                            <li><span class="dots"></span>Modelling</li>
-                            <li><span class="dots"></span>Model Testing</li>
-                            <li><span class="dots"></span>Text Analysis</li>
+                            @foreach (SubfieldOfService field in fields)
+                            {
+                                <li><span class="dots"></span>@field.Name</li>
+                            }
                         </ul>
-                        <figure class="image-box"><img src="images/service/service-7.png" alt=""></figure>
-                        <div class="link"><a href="service-details.html" class="btn-style-four">Read More<span>+</span></a></div>
+                        <figure class="image-box"><img src="images/@service.CoverPicture" alt=""></figure>
+                        <div class="link">
+                            <a asp-controller="Services" asp-action="Service_Details"
+                               asp-route-id="@service.Id" class="btn-style-four">
+                                Read More<span>+</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="service-block-five wow fadeInLeft" data-wow-delay="00ms" data-wow-duration="1500ms">
-                    <div class="inner-box">
-                        <div class="icon-box"><i class="flaticon-vr"></i></div>
-                        <h3><a href="service-details.html">Artificial Intelligence</a></h3>
-                        <ul class="list-item clearfix">
-                            <li><span class="dots"></span>Deep Learning</li>
-                            <li><span class="dots"></span>Predictive Analysis</li>
-                            <li><span class="dots"></span>Natural Language Processing</li>
-                        </ul>
-                        <figure class="image-box"><img src="images/service/service-8.png" alt=""></figure>
-                        <div class="link"><a href="service-details.html" class="btn-style-four">Read More<span>+</span></a></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 block-column">
-                <div class="service-block-five wow fadeInRight" data-wow-delay="00ms" data-wow-duration="1500ms">
-                    <div class="inner-box">
-                        <div class="icon-box"><i class="flaticon-brain"></i></div>
-                        <h3><a href="service-details.html">Machine Learning</a></h3>
-                        <ul class="list-item clearfix">
-                            <li><span class="dots"></span>Deep Learning</li>
-                            <li><span class="dots"></span>Predictive Analysis</li>
-                            <li><span class="dots"></span>Natural Language Processing</li>
-                        </ul>
-                        <figure class="image-box"><img src="images/service/service-9.png" alt=""></figure>
-                        <div class="link"><a href="service-details.html" class="btn-style-four">Read More<span>+</span></a></div>
-                    </div>
-                </div>
-                <div class="service-block-five wow fadeInRight" data-wow-delay="00ms" data-wow-duration="1500ms">
-                    <div class="inner-box">
-                        <div class="icon-box"><i class="flaticon-analytics"></i></div>
-                        <h3><a href="service-details.html">Data Warehousing</a></h3>
-                        <ul class="list-item clearfix">
-                            <li><span class="dots"></span>NLP & Text Analysis</li>
-                            <li><span class="dots"></span>Business Task Analysis</li>
-                            <li><span class="dots"></span>Modelling</li>
-                            <li><span class="dots"></span>Model Testing</li>
-                            <li><span class="dots"></span>Text Analysis</li>
-                        </ul>
-                        <figure class="image-box"><img src="images/service/service-10.png" alt=""></figure>
-                        <div class="link"><a href="service-details.html" class="btn-style-four">Read More<span>+</span></a></div>
-                    </div>
-                </div>
+                index++;
+            }
+
             </div>
         </div>
     </div>
@@ -90,239 +66,95 @@
             <div class="row clearfix">
                 <div class="col-lg-6 col-md-6 col-sm-12 video-column">
                     <div class="video-box">
-                        <a href="https://www.youtube.com/watch?v=nfP5N9Yc72A&amp;t=28s" class="lightbox-image" data-caption=""><i class="flaticon-play-button"></i></a>
+                        <a href="@Model.ServicesPage.VideoUrl" class="lightbox-image" data-caption=""><i class="flaticon-play-button"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 inner-column">
                     <div class="sec-title text-left light mb-50">
                         <p>Industries</p>
-                        <h2>Industries we are transforming</h2>
+                        <h2>@Model.ServicesPage.ExplanationAboutIndustries</h2>
                         <div class="decor" style="background-image: url(images/icons/decor-1.png);"></div>
                     </div>
                     <div class="tabs-content-inner">
                         <div class="p-tabs-content">
                             <div class="p-tab active-tab" id="p-tab-1">
                                 <div class="service-carousel-3 owl-carousel owl-theme">
-                                    <div class="content-box">
-                                        <div class="box">
-                                            <div class="icon-box"><i class="flaticon-product"></i></div>
-                                            <span>Industry</span>
-                                            <h4>Trasportation &<br />Logistics</h4>
+                                    @foreach (Industry industry in Model.Industries)
+                                    {
+                                        <div class="content-box">
+                                            <div class="box">
+                                                <div class="icon-box"><i class="@industry.Icon"></i></div>
+                                                <span>Industry</span>
+                                                <h4>@industry.Name</h4>
+                                            </div>
+                                            <div class="text">
+                                                <p>@industry.Description</p>
+                                            </div>
+                                            <div class="btn-box">
+                                                <a href="#" class="theme-btn style-one">Get Started<span>+</span></a>
+                                            </div>
                                         </div>
-                                        <div class="text">
-                                            <p>Equal blame belongs too those who fail in their through weak- ness will shrinking when our power choice untrammelled and then prevents our being able pleasure obligations of business it will frequently laborious physical exercises.</p>
-                                        </div>
-                                        <div class="btn-box">
-                                            <a href="index.html" class="theme-btn style-one">Get Started<span>+</span></a>
-                                        </div>
-                                    </div>
-                                    <div class="content-box">
-                                        <div class="box">
-                                            <div class="icon-box"><i class="flaticon-joystick"></i></div>
-                                            <span>Industry</span>
-                                            <h4>Media &<br />Entertainment</h4>
-                                        </div>
-                                        <div class="text">
-                                            <p>Equal blame belongs too those who fail in their through weak- ness will shrinking when our power choice untrammelled and then prevents our being able pleasure obligations of business it will frequently laborious physical exercises.</p>
-                                        </div>
-                                        <div class="btn-box">
-                                            <a href="index.html" class="theme-btn style-one">Get Started<span>+</span></a>
-                                        </div>
-                                    </div>
-                                    <div class="content-box">
-                                        <div class="box">
-                                            <div class="icon-box"><i class="flaticon-travel"></i></div>
-                                            <span>Industry</span>
-                                            <h4>Travel &<br />Hospitality</h4>
-                                        </div>
-                                        <div class="text">
-                                            <p>Equal blame belongs too those who fail in their through weak- ness will shrinking when our power choice untrammelled and then prevents our being able pleasure obligations of business it will frequently laborious physical exercises.</p>
-                                        </div>
-                                        <div class="btn-box">
-                                            <a href="index.html" class="theme-btn style-one">Get Started<span>+</span></a>
-                                        </div>
-                                    </div>
-                                    <div class="content-box">
-                                        <div class="box">
-                                            <div class="icon-box"><i class="flaticon-bank"></i></div>
-                                            <span>Industry</span>
-                                            <h4>Financials &<br />Banking</h4>
-                                        </div>
-                                        <div class="text">
-                                            <p>Equal blame belongs too those who fail in their through weak- ness will shrinking when our power choice untrammelled and then prevents our being able pleasure obligations of business it will frequently laborious physical exercises.</p>
-                                        </div>
-                                        <div class="btn-box">
-                                            <a href="index.html" class="theme-btn style-one">Get Started<span>+</span></a>
-                                        </div>
-                                    </div>
+                                    }
                                 </div>
                             </div>
                             <div class="p-tab" id="p-tab-2">
                                 <div class="service-carousel-3 owl-carousel owl-theme">
-                                    <div class="content-box">
-                                        <div class="box">
-                                            <div class="icon-box"><i class="flaticon-joystick"></i></div>
-                                            <span>Industry</span>
-                                            <h4>Media &<br />Entertainment</h4>
+                                    @foreach (Industry industry in Model.Industries)
+                                    {
+                                        <div class="content-box">
+                                            <div class="box">
+                                                <div class="icon-box"><i class="@industry.Icon"></i></div>
+                                                <span>Industry</span>
+                                                <h4>@industry.Name</h4>
+                                            </div>
+                                            <div class="text">
+                                                <p>@industry.Description</p>
+                                            </div>
+                                            <div class="btn-box">
+                                                <a href="#" class="theme-btn style-one">Get Started<span>+</span></a>
+                                            </div>
                                         </div>
-                                        <div class="text">
-                                            <p>Equal blame belongs too those who fail in their through weak- ness will shrinking when our power choice untrammelled and then prevents our being able pleasure obligations of business it will frequently laborious physical exercises.</p>
-                                        </div>
-                                        <div class="btn-box">
-                                            <a href="index.html" class="theme-btn style-one">Get Started<span>+</span></a>
-                                        </div>
-                                    </div>
-                                    <div class="content-box">
-                                        <div class="box">
-                                            <div class="icon-box"><i class="flaticon-product"></i></div>
-                                            <span>Industry</span>
-                                            <h4>Trasportation &<br />Logistics</h4>
-                                        </div>
-                                        <div class="text">
-                                            <p>Equal blame belongs too those who fail in their through weak- ness will shrinking when our power choice untrammelled and then prevents our being able pleasure obligations of business it will frequently laborious physical exercises.</p>
-                                        </div>
-                                        <div class="btn-box">
-                                            <a href="index.html" class="theme-btn style-one">Get Started<span>+</span></a>
-                                        </div>
-                                    </div>
-                                    <div class="content-box">
-                                        <div class="box">
-                                            <div class="icon-box"><i class="flaticon-travel"></i></div>
-                                            <span>Industry</span>
-                                            <h4>Travel &<br />Hospitality</h4>
-                                        </div>
-                                        <div class="text">
-                                            <p>Equal blame belongs too those who fail in their through weak- ness will shrinking when our power choice untrammelled and then prevents our being able pleasure obligations of business it will frequently laborious physical exercises.</p>
-                                        </div>
-                                        <div class="btn-box">
-                                            <a href="index.html" class="theme-btn style-one">Get Started<span>+</span></a>
-                                        </div>
-                                    </div>
-                                    <div class="content-box">
-                                        <div class="box">
-                                            <div class="icon-box"><i class="flaticon-bank"></i></div>
-                                            <span>Industry</span>
-                                            <h4>Financials &<br />Banking</h4>
-                                        </div>
-                                        <div class="text">
-                                            <p>Equal blame belongs too those who fail in their through weak- ness will shrinking when our power choice untrammelled and then prevents our being able pleasure obligations of business it will frequently laborious physical exercises.</p>
-                                        </div>
-                                        <div class="btn-box">
-                                            <a href="index.html" class="theme-btn style-one">Get Started<span>+</span></a>
-                                        </div>
-                                    </div>
+                                    }
                                 </div>
                             </div>
                             <div class="p-tab" id="p-tab-3">
                                 <div class="service-carousel-3 owl-carousel owl-theme">
-                                    <div class="content-box">
-                                        <div class="box">
-                                            <div class="icon-box"><i class="flaticon-travel"></i></div>
-                                            <span>Industry</span>
-                                            <h4>Travel &<br />Hospitality</h4>
+                                    @foreach (Industry industry in Model.Industries)
+                                    {
+                                        <div class="content-box">
+                                            <div class="box">
+                                                <div class="icon-box"><i class="@industry.Icon"></i></div>
+                                                <span>Industry</span>
+                                                <h4>@industry.Name</h4>
+                                            </div>
+                                            <div class="text">
+                                                <p>@industry.Description</p>
+                                            </div>
+                                            <div class="btn-box">
+                                                <a href="#" class="theme-btn style-one">Get Started<span>+</span></a>
+                                            </div>
                                         </div>
-                                        <div class="text">
-                                            <p>Equal blame belongs too those who fail in their through weak- ness will shrinking when our power choice untrammelled and then prevents our being able pleasure obligations of business it will frequently laborious physical exercises.</p>
-                                        </div>
-                                        <div class="btn-box">
-                                            <a href="index.html" class="theme-btn style-one">Get Started<span>+</span></a>
-                                        </div>
-                                    </div>
-                                    <div class="content-box">
-                                        <div class="box">
-                                            <div class="icon-box"><i class="flaticon-product"></i></div>
-                                            <span>Industry</span>
-                                            <h4>Trasportation &<br />Logistics</h4>
-                                        </div>
-                                        <div class="text">
-                                            <p>Equal blame belongs too those who fail in their through weak- ness will shrinking when our power choice untrammelled and then prevents our being able pleasure obligations of business it will frequently laborious physical exercises.</p>
-                                        </div>
-                                        <div class="btn-box">
-                                            <a href="index.html" class="theme-btn style-one">Get Started<span>+</span></a>
-                                        </div>
-                                    </div>
-                                    <div class="content-box">
-                                        <div class="box">
-                                            <div class="icon-box"><i class="flaticon-joystick"></i></div>
-                                            <span>Industry</span>
-                                            <h4>Media &<br />Entertainment</h4>
-                                        </div>
-                                        <div class="text">
-                                            <p>Equal blame belongs too those who fail in their through weak- ness will shrinking when our power choice untrammelled and then prevents our being able pleasure obligations of business it will frequently laborious physical exercises.</p>
-                                        </div>
-                                        <div class="btn-box">
-                                            <a href="index.html" class="theme-btn style-one">Get Started<span>+</span></a>
-                                        </div>
-                                    </div>
-                                    <div class="content-box">
-                                        <div class="box">
-                                            <div class="icon-box"><i class="flaticon-bank"></i></div>
-                                            <span>Industry</span>
-                                            <h4>Financials &<br />Banking</h4>
-                                        </div>
-                                        <div class="text">
-                                            <p>Equal blame belongs too those who fail in their through weak- ness will shrinking when our power choice untrammelled and then prevents our being able pleasure obligations of business it will frequently laborious physical exercises.</p>
-                                        </div>
-                                        <div class="btn-box">
-                                            <a href="index.html" class="theme-btn style-one">Get Started<span>+</span></a>
-                                        </div>
-                                    </div>
+                                    }
                                 </div>
                             </div>
                             <div class="p-tab" id="p-tab-4">
                                 <div class="service-carousel-3 owl-carousel owl-theme">
-                                    <div class="content-box">
-                                        <div class="box">
-                                            <div class="icon-box"><i class="flaticon-bank"></i></div>
-                                            <span>Industry</span>
-                                            <h4>Financials &<br />Banking</h4>
+                                    @foreach (Industry industry in Model.Industries)
+                                    {
+                                        <div class="content-box">
+                                            <div class="box">
+                                                <div class="icon-box"><i class="@industry.Icon"></i></div>
+                                                <span>Industry</span>
+                                                <h4>@industry.Name</h4>
+                                            </div>
+                                            <div class="text">
+                                                <p>@industry.Description</p>
+                                            </div>
+                                            <div class="btn-box">
+                                                <a href="#" class="theme-btn style-one">Get Started<span>+</span></a>
+                                            </div>
                                         </div>
-                                        <div class="text">
-                                            <p>Equal blame belongs too those who fail in their through weak- ness will shrinking when our power choice untrammelled and then prevents our being able pleasure obligations of business it will frequently laborious physical exercises.</p>
-                                        </div>
-                                        <div class="btn-box">
-                                            <a href="index.html" class="theme-btn style-one">Get Started<span>+</span></a>
-                                        </div>
-                                    </div>
-                                    <div class="content-box">
-                                        <div class="box">
-                                            <div class="icon-box"><i class="flaticon-product"></i></div>
-                                            <span>Industry</span>
-                                            <h4>Trasportation &<br />Logistics</h4>
-                                        </div>
-                                        <div class="text">
-                                            <p>Equal blame belongs too those who fail in their through weak- ness will shrinking when our power choice untrammelled and then prevents our being able pleasure obligations of business it will frequently laborious physical exercises.</p>
-                                        </div>
-                                        <div class="btn-box">
-                                            <a href="index.html" class="theme-btn style-one">Get Started<span>+</span></a>
-                                        </div>
-                                    </div>
-                                    <div class="content-box">
-                                        <div class="box">
-                                            <div class="icon-box"><i class="flaticon-joystick"></i></div>
-                                            <span>Industry</span>
-                                            <h4>Media &<br />Entertainment</h4>
-                                        </div>
-                                        <div class="text">
-                                            <p>Equal blame belongs too those who fail in their through weak- ness will shrinking when our power choice untrammelled and then prevents our being able pleasure obligations of business it will frequently laborious physical exercises.</p>
-                                        </div>
-                                        <div class="btn-box">
-                                            <a href="index.html" class="theme-btn style-one">Get Started<span>+</span></a>
-                                        </div>
-                                    </div>
-                                    <div class="content-box">
-                                        <div class="box">
-                                            <div class="icon-box"><i class="flaticon-travel"></i></div>
-                                            <span>Industry</span>
-                                            <h4>Travel &<br />Hospitality</h4>
-                                        </div>
-                                        <div class="text">
-                                            <p>Equal blame belongs too those who fail in their through weak- ness will shrinking when our power choice untrammelled and then prevents our being able pleasure obligations of business it will frequently laborious physical exercises.</p>
-                                        </div>
-                                        <div class="btn-box">
-                                            <a href="index.html" class="theme-btn style-one">Get Started<span>+</span></a>
-                                        </div>
-                                    </div>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -331,30 +163,17 @@
             </div>
             <div class="tab-btn-box">
                 <ul class="service-tab-btns tab-btns clearfix post-filter">
-                    <li class="p-tab-btn active-btn" data-tab="#p-tab-1">
-                        <div class="btn-inner">
-                            <div class="icon-box"><i class="flaticon-product"></i></div>
-                            <h4>Trasportation & Logistics</h4>
-                        </div>
-                    </li>
-                    <li class="p-tab-btn" data-tab="#p-tab-2">
-                        <div class="btn-inner">
-                            <div class="icon-box"><i class="flaticon-joystick"></i></div>
-                            <h4>Media & Entertainment</h4>
-                        </div>
-                    </li>
-                    <li class="p-tab-btn" data-tab="#p-tab-3">
-                        <div class="btn-inner">
-                            <div class="icon-box"><i class="flaticon-travel"></i></div>
-                            <h4>Travel & Hospitality</h4>
-                        </div>
-                    </li>
-                    <li class="p-tab-btn" data-tab="#p-tab-4">
-                        <div class="btn-inner">
-                            <div class="icon-box"><i class="flaticon-bank"></i></div>
-                            <h4>Financials & Banking</h4>
-                        </div>
-                    </li>
+                    @{ int industryIndex = 1;}
+                    @foreach (Industry industry in Model.Industries)
+                    {
+                        <li class="p-tab-btn active-btn" data-tab="#p-tab-@industryIndex">
+                            <div class="btn-inner">
+                                <div class="icon-box"><i class="@industry.Icon"></i></div>
+                                <h4>@industry.Name</h4>
+                            </div>
+                        </li>
+                        industryIndex++;
+                    }
                 </ul>
             </div>
         </div>
@@ -367,64 +186,32 @@
         <div class="row clearfix">
             <div class="col-lg-4 col-md-12 col-sm-12 content-column">
                 <div class="content-box">
-                    <h3>Award Winning Service</h3>
-                    <figure class="award-image"><img src="images/resource/award-1.png" alt=""></figure>
-                    <p>To take a trivial example, which<br />idea of ever undertakes.</p>
+                    <h3>@Model.ServicesPage.AwardText</h3>
+                    <figure class="award-image"><img src="images/@Model.ServicesPage.AwardPicture" alt=""></figure>
+                    <p>@Model.ServicesPage.AwardDescription</p>
                 </div>
             </div>
             <div class="col-lg-8 col-md-12 col-sm-12 inner-column">
                 <div class="testimonial-carousel-4 owl-carousel owl-theme owl-dots-none">
-                    <div class="testimonial-content">
-                        <div class="inner-box">
-                            <ul class="rating clearfix">
-                                <li><i class="flaticon-stars"></i></li>
-                                <li><i class="flaticon-stars"></i></li>
-                                <li><i class="flaticon-stars"></i></li>
-                                <li><i class="flaticon-stars"></i></li>
-                                <li><i class="flaticon-stars"></i></li>
-                            </ul>
-                            <p>As a growing company, we found in Naxly’ expertise in data science invaluable. In almost two years of cooperation, they’ve helped us.</p>
-                            <div class="author-info">
-                                <figure class="image-box"><img src="images/resource/testimonial-8.png" alt=""></figure>
-                                <h4>Zedrew Kowzel</h4>
-                                <span class="designation">CTO of Smart Tech Solution</span>
+                    @foreach (Testimonial testimonial in Model.Testimonials)
+                    {
+                        <div class="testimonial-content">
+                            <div class="inner-box">
+                                <ul class="rating clearfix">
+                                    @for (int i = 0; i < testimonial.NumberOfStars; i++)
+                                    {
+                                        <li><i class="flaticon-stars"></i></li>
+                                    }
+                                </ul>
+                                <p>@testimonial.Review</p>
+                                <div class="author-info">
+                                    <figure class="image-box"><img src="images/@testimonial.Photo" alt=""></figure>
+                                    <h4>@testimonial.Fullname</h4>
+                                    <span class="designation">@testimonial.Designation</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="testimonial-content">
-                        <div class="inner-box">
-                            <ul class="rating clearfix">
-                                <li><i class="flaticon-stars"></i></li>
-                                <li><i class="flaticon-stars"></i></li>
-                                <li><i class="flaticon-stars"></i></li>
-                                <li><i class="flaticon-stars"></i></li>
-                                <li><i class="flaticon-stars"></i></li>
-                            </ul>
-                            <p>As a growing company, we found in Naxly’ expertise in data science invaluable. In almost two years of cooperation, they’ve helped us.</p>
-                            <div class="author-info">
-                                <figure class="image-box"><img src="images/resource/testimonial-8.png" alt=""></figure>
-                                <h4>Zedrew Kowzel</h4>
-                                <span class="designation">CTO of Smart Tech Solution</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-content">
-                        <div class="inner-box">
-                            <ul class="rating clearfix">
-                                <li><i class="flaticon-stars"></i></li>
-                                <li><i class="flaticon-stars"></i></li>
-                                <li><i class="flaticon-stars"></i></li>
-                                <li><i class="flaticon-stars"></i></li>
-                                <li><i class="flaticon-stars"></i></li>
-                            </ul>
-                            <p>As a growing company, we found in Naxly’ expertise in data science invaluable. In almost two years of cooperation, they’ve helped us.</p>
-                            <div class="author-info">
-                                <figure class="image-box"><img src="images/resource/testimonial-8.png" alt=""></figure>
-                                <h4>Zedrew Kowzel</h4>
-                                <span class="designation">CTO of Smart Tech Solution</span>
-                            </div>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>

@@ -1,0 +1,80 @@
+﻿@model NaxlyAI.Models.ViewModels.AdminProjects
+@{
+    ViewData["Title"] = "Projects";
+}
+
+<div style="display: flex; margin-bottom: 10px;">
+    <h3>Projects</h3>
+    <a style="font-size: 1.5em; margin-left: 10px;" asp-controller="Admin" asp-action="AddProject"><i class="bi bi-plus-square"></i></a>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Page Header</th>
+            <th scope="col">Time Period</th>
+            <th scope="col">Website</th>
+            <th scope="col">Cover Picture</th>
+            <th scope="col">Process Description</th>
+            <th scope="col">Result Description</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var project in Model.Projects)
+        {
+            using (Html.BeginForm("DeleteProject", "Admin", new { id = project.Id }))
+            {
+                <tr>
+                    <td>@project.Name</td>
+                    <td>@project.PageHeader</td>
+                    <td>@project.TimePeriod</td>
+                    <td>@project.Website</td>
+                    <td>@project.CoverPicture</td>
+                    <td>@project.ProcessDescription</td>
+                    <td>@project.ResultDescription</td>
+                    <td>
+                        @Html.ActionLink("Update", "UpdateProject", "Admin", new { id = project.Id }, null)
+                        @Html.ActionLink("Details", "ProjectDetails", "Admin", new { id = project.Id }, null)
+                        <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure to delete this information?')" />
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div style="display: flex; margin-bottom: 10px;">
+<h3>Steps of Projects</h3>
+<a style="font-size: 1.5em; margin-left: 10px;" asp-controller="Admin" asp-action="AddProjectStep"><i class="bi bi-plus-square"></i></a>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Parent Project</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Picture</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var step in Model.StepsOfProjects)
+        {
+            using (Html.BeginForm("DeleteProjectStep", "Admin", new { id = step.Id }))
+            {
+                <tr>
+                    <td>@step.Project.Name</td>
+                    <td>@step.Name</td>
+                    <td>@step.Description</td>
+                    <td>@step.Picture</td>
+                    <td>
+                        @Html.ActionLink("Update", "UpdateProjectStep", "Admin", new { id = step.Id }, null)
+                        <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure to delete this information?')" />
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

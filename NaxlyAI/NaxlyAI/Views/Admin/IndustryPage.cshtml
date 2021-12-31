@@ -1,0 +1,25 @@
+﻿@model NaxlyAI.Models.Industry
+@{
+    ViewData["Title"] = ViewData["PageDesc"];
+}
+
+<h3>@ViewData["PageDesc"]</h3>
+<form method="POST">
+    <div class="form-group">
+        <label asp-for="Name">Industry Name</label>
+        <input asp-for="Name" class="form-control form-control-lg" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Industry Description</label>
+        <input asp-for="Description" class="form-control form-control-lg" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Icon">Industry Icon</label>
+        <input asp-for="Icon" class="form-control form-control-lg" />
+        <span asp-validation-for="Icon" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">@ViewData["Button"]</button>
+</form>
+

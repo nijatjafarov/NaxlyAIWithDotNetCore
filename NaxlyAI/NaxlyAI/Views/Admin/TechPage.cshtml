@@ -1,0 +1,19 @@
+﻿@model NaxlyAI.Models.Technology
+@{
+    ViewData["Title"] = ViewData["PageDesc"];
+}
+
+<h3>@ViewData["PageDesc"]</h3>
+<form method="POST">
+    <div class="form-group">
+        <label asp-for="Name">Technology Name</label>
+        <input asp-for="Name" class="form-control form-control-lg" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Picture">Technology Icon class</label>
+        <input asp-for="Picture" class="form-control form-control-lg" />
+        <span asp-validation-for="Picture" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">@ViewData["Button"]</button>
+</form>

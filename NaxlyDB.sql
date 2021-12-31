@@ -9,17 +9,17 @@ PageHeader nvarchar(40) NOT NULL,
 Slogan nvarchar(150),
 Description nvarchar(300) NOT NULL,
 VideoTitle nvarchar(70),
-VideoUrl text,
+VideoUrl nvarchar(max),
 FoundationYear integer,
-Picture1 text,
-Picture2 text,
-Picture3 text,
+Picture1 nvarchar(100),
+Picture2 nvarchar(100),
+Picture3 nvarchar(100),
 AboutOurHistory nvarchar(100),
 WhyChooseUs nvarchar(120),
-WhyChooseUsPicture1 text,
-WhyChooseUsPicture2 text,
+WhyChooseUsPicture1 nvarchar(100),
+WhyChooseUsPicture2 nvarchar(100),
 TeamMemberDesc nvarchar(150),
-HomeCoverPicture text
+HomeCoverPicture nvarchar(100)
 );
 
 CREATE TABLE ReasonForChoosingUs(
@@ -48,7 +48,7 @@ Date datetime
 
 CREATE TABLE TeamMember(
 Id int IDENTITY(1, 1) PRIMARY KEY,
-Photo text NOT NULL,
+Photo nvarchar(100) NOT NULL,
 Fullname nvarchar(50) NOT NULL,
 Designation nvarchar(70) NOT NULL,
 Email nvarchar(300) NOT NULL
@@ -68,7 +68,7 @@ CONSTRAINT SocialMediaFK
 	FOREIGN KEY (SocialMediaId) REFERENCES SocialMedia(Id),
 CONSTRAINT SMMemberFK
 	FOREIGN KEY (MemberId) REFERENCES TeamMember(Id),
-Url text NOT NULL
+Url nvarchar(max) NOT NULL
 );
 
 CREATE TABLE Contact(
@@ -96,14 +96,15 @@ Id int IDENTITY(1, 1) PRIMARY KEY,
 Name nvarchar(60) NOT NULL,
 Email nvarchar(300) NOT NULL,
 Subject nvarchar(50),
-Message text NOT NULL,
+Message nvarchar(max) NOT NULL,
 Date datetime NOT NULL
 );
 
 CREATE TABLE HomePage(
 Id int IDENTITY(1, 1) PRIMARY KEY,
+FirstPicture nvarchar(100),
 AboutServices nvarchar(150),
-ServicesPicture text,
+ServicesPicture nvarchar(100),
 AboutProjects nvarchar(150),
 AboutWorkProcess nvarchar(150),
 WorkProcessHeader1 nvarchar(50) NOT NULL,
@@ -113,7 +114,7 @@ WorkProcessDesc2 nvarchar(100) NOT NULL,
 WorkProcessHeader3 nvarchar(50) NOT NULL,
 WorkProcessDesc3 nvarchar(100) NOT NULL,
 AboutWhyChooseUs nvarchar(100),
-WhyChooseUsPicture text,
+WhyChooseUsPicture nvarchar(100),
 ClientDescription nvarchar(100)
 );
 
@@ -129,11 +130,12 @@ Id int IDENTITY(1, 1) PRIMARY KEY,
 PageHeader nvarchar(40) NOT NULL,
 Explanation nvarchar(100),
 ExplanationAboutIndustries nvarchar(100),
-VideoUrl text,
+VideoUrl nvarchar(max),
 AwardText nvarchar(40),
-AwardPicture text,
+AwardPicture nvarchar(100),
 AwardDescription nvarchar(150)
 );
+
 
 CREATE TABLE Service(
 Id int IDENTITY(1, 1) PRIMARY KEY,
@@ -141,24 +143,26 @@ Name nvarchar(100) NOT NULL,
 PageHeader nvarchar(150) NOT NULL,
 Intro nvarchar(60),
 Description nvarchar(300),
-StartYourProjectUrl text,
-FirstPicture text,
+StartYourProjectUrl nvarchar(max),
+FirstPicture nvarchar(100),
 SubservicesHeader nvarchar(100),
 SubservicesDescription nvarchar(max),
 TechnologiesHeader nvarchar(100),
 TechnologiesDescription nvarchar(200),
-SecondPicture text,
+SecondPicture nvarchar(100),
 ApplicationHeader nvarchar(100),
 ApplicationDescription nvarchar(500),
 ProjectsHeader nvarchar(100) NOT NULL,
-CoverPicture text,
-Icon nvarchar(50)
+CoverPicture nvarchar(100),
+Icon nvarchar(50),
+ContactHeader nvarchar(100),
+ContactDesc nvarchar(500)
 );
 
 CREATE TABLE Technology(
 Id int IDENTITY(1, 1) PRIMARY KEY,
 Name nvarchar(100) NOT NULL,
-Picture text
+Picture nvarchar(100)
 );
 
 CREATE TABLE TechAndService(
@@ -188,7 +192,7 @@ Icon nvarchar(50),
 Name nvarchar(50) NOT NULL,
 Description nvarchar(150) NOT NULL,
 Type nvarchar(50),
-Url text NOT NULL,
+Url nvarchar(max) NOT NULL,
 ServiceId int NOT NULL,
 CONSTRAINT SubserviceOfServiceFK
 	FOREIGN KEY (ServiceId) REFERENCES Service(Id)
@@ -208,7 +212,7 @@ CREATE TABLE Client(
 Id int IDENTITY(1, 1) PRIMARY KEY,
 Name nvarchar(50) NOT NULL,
 Logo nvarchar(70) NOT NULL,
-ShowOnHomePage bit NOT NULL
+Url nvarchar(max)
 );
 
 CREATE TABLE Project(
@@ -273,8 +277,8 @@ CONSTRAINT ServiceOfFieldFK
 
 CREATE TABLE Configuration(
 Id int IDENTITY(1, 1) PRIMARY KEY,
-MainLogo nvarchar(50) NOT NULL,
-DarkLogo nvarchar(70),
+Logo nvarchar(100) NOT NULL,
+SecondLogo nvarchar(100),
 PhoneNumber nvarchar(20) NOT NULL,
 Slogan nvarchar(150),
 Description nvarchar(400)
@@ -284,5 +288,5 @@ CREATE TABLE SocialMediaOfCompany(
 Id int IDENTITY(1, 1) PRIMARY KEY,
 Name nvarchar(50) NOT NULL,
 Icon nvarchar(50),
-Url text NOT NULL
+Url nvarchar(max) NOT NULL
 );

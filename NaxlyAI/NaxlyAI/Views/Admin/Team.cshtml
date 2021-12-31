@@ -1,0 +1,100 @@
+﻿@model NaxlyAI.Models.ViewModels.AdminTeam
+@{
+    ViewData["Title"] = "Admin Team";
+}
+
+<div style="display: flex; margin-bottom: 10px;">
+    <h3>Team Members</h3>
+    <a style="font-size: 1.5em; margin-left: 10px;" asp-controller="Admin" asp-action="AddTeamMember"><i class="bi bi-plus-square"></i></a>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Fullname</th>
+            <th scope="col">Photo</th>
+            <th scope="col">Designation</th>
+            <th scope="col">Email</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var member in Model.TeamMembers)
+        {
+            using (Html.BeginForm("DeleteTeamMember", "Admin", new { id = member.Id }))
+            {
+                <tr>
+                    <td>@member.Fullname</td>
+                    <td>@member.Photo</td>
+                    <td>@member.Designation</td>
+                    <td>@member.Email</td>
+                    <td>
+                        @Html.ActionLink("Update", "UpdateTeamMember", "Admin", new { id = member.Id }, null)
+                        <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure to delete this information?')" />
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div style="display: flex; margin-bottom: 10px;">
+    <h3>Social Medias</h3>
+    <a style="font-size: 1.5em; margin-left: 10px;" asp-controller="Admin" asp-action="AddSocialMedia"><i class="bi bi-plus-square"></i></a>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Icon</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var media in Model.SocialMedias)
+        {
+            using (Html.BeginForm("DeleteSocialMedia", "Admin", new { id = media.Id }))
+            {
+                <tr>
+                    <td>@media.Name</td>
+                    <td>@media.Icon</td>
+                    <td>
+                        @Html.ActionLink("Update", "UpdateSocialMedia", "Admin", new { id = media.Id }, null)
+                        <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure to delete this information?')" />
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div style="display: flex; margin-bottom: 10px;">
+    <h3>Social Media Accounts of Members</h3>
+    <a style="font-size: 1.5em; margin-left: 10px;" asp-controller="Admin" asp-action="AddSMForMember"><i class="bi bi-plus-square"></i></a>
+</div>
+<table style="margin-bottom: 5%;" class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Member Name</th>
+            <th scope="col">Social Media</th>
+            <th scope="col">Url</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var media in Model.SMsOfMembers)
+        {
+            using (Html.BeginForm("DeleteSmForMember", "Admin", new { id = media.Id }))
+            {
+        <tr>
+            <td>@media.Member.Fullname</td>
+            <td>@media.SocialMedia.Name</td>
+            <td>@media.Url</td>
+            <td>
+                @Html.ActionLink("Update", "UpdateSmForMember", "Admin", new { id = media.Id }, null)
+                <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure to delete this information?')" />
+            </td>
+        </tr>
+            }
+        }
+    </tbody>
+</table>

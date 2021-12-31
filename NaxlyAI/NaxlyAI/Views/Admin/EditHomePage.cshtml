@@ -1,0 +1,76 @@
+﻿@model NaxlyAI.Models.ViewModels.EditHome
+
+<h3>@ViewData["PageDesc"]</h3>
+<form enctype="multipart/form-data" asp-controller="Admin" asp-action="EditHomePage" method="POST">
+    <div class="form-group">
+        <label asp-for="FirstPicture">First Picture</label>
+        <input asp-for="FirstPicture" class="form-control-file" />
+        <span asp-validation-for="FirstPicture" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AboutServices">Services Information</label>
+        <input asp-for="AboutServices" class="form-control form-control-lg" />
+        <span asp-validation-for="AboutServices" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ServicesPicture">Services Picture</label>
+        <input asp-for="ServicesPicture" class="form-control-file" />
+        <span asp-validation-for="ServicesPicture" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AboutProjects">Projects Information</label>
+        <input asp-for="AboutProjects" class="form-control form-control-lg" />
+        <span asp-validation-for="AboutProjects" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AboutWorkProcess">Work Process Information</label>
+        <input asp-for="AboutWorkProcess" class="form-control form-control-lg" />
+        <span asp-validation-for="AboutWorkProcess" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="WorkProcessHeader1">Work Process First Header</label>
+        <input asp-for="WorkProcessHeader1" class="form-control form-control-lg" />
+        <span asp-validation-for="WorkProcessHeader1" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="WorkProcessDesc1">Work Process First Description</label>
+        <input asp-for="WorkProcessDesc1" class="form-control form-control-lg" />
+        <span asp-validation-for="WorkProcessDesc1" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="WorkProcessHeader2">Work Process Second Header</label>
+        <input asp-for="WorkProcessHeader2" class="form-control form-control-lg" />
+        <span asp-validation-for="WorkProcessHeader2" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="WorkProcessDesc2">Work Process Second Description</label>
+        <input asp-for="WorkProcessDesc2" class="form-control form-control-lg" />
+        <span asp-validation-for="WorkProcessDesc2" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="WorkProcessHeader3">Work Process Third Header</label>
+        <input asp-for="WorkProcessHeader3" class="form-control form-control-lg" />
+        <span asp-validation-for="WorkProcessHeader3" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="WorkProcessDesc3">Work Process Third Description</label>
+        <input asp-for="WorkProcessDesc3" class="form-control form-control-lg" />
+        <span asp-validation-for="WorkProcessDesc3" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AboutWhyChooseUs">Information About Why Choose Us</label>
+        <input asp-for="AboutWhyChooseUs" class="form-control form-control-lg" />
+        <span asp-validation-for="AboutWhyChooseUs" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="WhyChooseUsPicture">Picture for Why Choose Us</label>
+        <input asp-for="WhyChooseUsPicture" class="form-control-file" />
+        <span asp-validation-for="WhyChooseUsPicture" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ClientDescription">Description About Clients</label>
+        <input asp-for="ClientDescription" class="form-control form-control-lg" />
+        <span asp-validation-for="ClientDescription" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">@ViewData["Button"]</button>
+</form>

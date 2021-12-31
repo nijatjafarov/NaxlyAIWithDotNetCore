@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NaxlyAI.Models;
 //using NaxlyAI.Models;
 using System;
 using System.Collections.Generic;
@@ -24,6 +26,8 @@ namespace NaxlyAI
             {
                 options.EnableEndpointRouting = false;
             });
+            services.AddDbContext<NaxlyAIContext>(options => options.
+            UseSqlServer("data source=DESKTOP-P6NV8LT\\SQLEXPRESS;initial catalog=NaxlyAI;user id=sa;password=Azerbaijan994;"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,6 +1,9 @@
-﻿
+﻿@model NaxlyAI.Models.Project
 @{
     ViewData["Title"] = "Project";
+    ViewData["PageHeader"] = Model.PageHeader;
+    ViewData["ParentName"] = "Projects";
+    NaxlyAIContext context = new NaxlyAIContext();
 }
 
 @Html.Partial("PageTitle")
@@ -14,9 +17,9 @@
                     <div class="project-details-content">
                         <div class="data-box">
                             <div class="title-box">
-                                <span>Banking & Finance</span>
-                                <h3>Data capture & ML consulting services to map out the way to a custom</h3>
-                                <p>Must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born will give you a complete account of the system pain can procure him some great pleasure expound the actual of  the master-builder of human happiness.</p>
+                                <span>@context.Industries.Find(Model.IndustyId).Name</span>
+                                <h3>@Model.Header</h3>
+                                <p>@Model.Description</p>
                             </div>
                             <div class="intro-box">
                                 <div class="single-item clearfix">
@@ -26,7 +29,7 @@
                                         <p>Better way to know</p>
                                     </div>
                                     <div class="right-column">
-                                        <p>Idea of denouncing pleasure and praising pain was born and give you a complete account of the system.</p>
+                                        <p>@Model.Challenge</p>
                                     </div>
                                 </div>
                                 <div class="single-item clearfix">
@@ -36,70 +39,50 @@
                                         <p>Better way to know</p>
                                     </div>
                                     <div class="right-column">
-                                        <p>Undertakes laborious physical exercise, except to obtain some from it man who chooses to enjoy.</p>
+                                        <p>@Model.Solution</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <figure class="single-image"><img src="~/images/gallery/gallery-29.jpg" alt=""></figure>
+                        <figure class="single-image"><img src="~/images/@Model.PagePicture" alt=""></figure>
                         <div class="processing-system">
                             <div class="title-box">
                                 <h3>Processing System</h3>
-                                <p>Must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born will give you a complete account of the system pain can procure.</p>
+                                <p>@Model.ProcessDescription</p>
                             </div>
                             <div class="tabs-box">
                                 <div class="tab-btn-box">
                                     <ul class="tab-btns tab-buttons clearfix">
-                                        <li class="tab-btn active-btn" data-tab="#tab-1"><span>Step 01</span></li>
-                                        <li class="tab-btn" data-tab="#tab-2"><span>Step 02</span></li>
-                                        <li class="tab-btn" data-tab="#tab-3"><span>Step 03</span></li>
-                                        <li class="tab-btn" data-tab="#tab-4"><span>Step 04</span></li>
+                                        @{
+                                            List<StepOfProject> steps = context.StepOfProjects.
+                                                Where(s => s.ProjectId == Model.Id).ToList();
+                                        }
+                                        @for (int i = 0; i < steps.Count(); i++)
+                                        {
+                                            <li class="tab-btn @(i==0 ? "active-btn" : "")" data-tab="#tab-@(i+1)"><span>Step 0@(i+1)</span></li>
+                                        }
                                     </ul>
                                 </div>
                                 <div class="tabs-content">
-                                    <div class="tab active-tab" id="tab-1">
-                                        <div class="content-box">
-                                            <figure class="image-box"><img src="~/images/resource/illastration-9.png" alt=""></figure>
-                                            <div class="text">
-                                                <h3>Step1: Recognition</h3>
-                                                <p>There anyone who loves or pursues or desires to obtain pain of itself, because it pain but because occasionally circumstances occurs in which toil and pain procures him some great pleasure take a trivial example physical exercise.</p>
-                                            </div>
+                                    @for (int i = 0; i < steps.Count(); i++)
+                                    {
+                                    <div style="display:@(i == 0 ? "block" : "none") " class="tab @(i==0 ? "active-btn" : "")" id="tab-@(i+1)">
+                                            <div class="content-box">
+                                        <figure class="image-box"><img src="~/images/@steps[i].Picture" alt=""></figure>
+                                        <div class="text">
+                                            <h3>Step@(i+1): @steps[i].Name</h3>
+                                            <p>@steps[i].Description</p>
                                         </div>
                                     </div>
-                                    <div class="tab" id="tab-2">
-                                        <div class="content-box">
-                                            <figure class="image-box"><img src="~/images/resource/illastration-9.png" alt=""></figure>
-                                            <div class="text">
-                                                <h3>Step2: Recognition</h3>
-                                                <p>There anyone who loves or pursues or desires to obtain pain of itself, because it pain but because occasionally circumstances occurs in which toil and pain procures him some great pleasure take a trivial example physical exercise.</p>
-                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="tab" id="tab-3">
-                                        <div class="content-box">
-                                            <figure class="image-box"><img src="~/images/resource/illastration-9.png" alt=""></figure>
-                                            <div class="text">
-                                                <h3>Step3: Recognition</h3>
-                                                <p>There anyone who loves or pursues or desires to obtain pain of itself, because it pain but because occasionally circumstances occurs in which toil and pain procures him some great pleasure take a trivial example physical exercise.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab" id="tab-4">
-                                        <div class="content-box">
-                                            <figure class="image-box"><img src="~/images/resource/illastration-9.png" alt=""></figure>
-                                            <div class="text">
-                                                <h3>Step4: Recognition</h3>
-                                                <p>There anyone who loves or pursues or desires to obtain pain of itself, because it pain but because occasionally circumstances occurs in which toil and pain procures him some great pleasure take a trivial example physical exercise.</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    }
                                 </div>
                             </div>
                         </div>
                         <div class="result-box">
                             <div class="inner">
                                 <h3>Results</h3>
-                                <p>Any right to find fault with a man who chooses to enjoy a pleasure that has annoying consequences, or one who avoids a pain that produces no resultant encounter.</p>
+                                <p>@Model.ResultDescription</p>
                             </div>
                         </div>
                     </div>
@@ -113,8 +96,14 @@
                                     <span>Support Team</span>
                                 </div>
                                 <div class="text">
-                                    <p>Jonathan Trott</p>
-                                    <p>Jeffery Williams</p>
+                                    @{
+                                        var projAndMembers = context.ProjectAndMembers.
+                                            Where(p => p.ProjectId == Model.Id).ToList();
+                                    }
+                                    @foreach (var projAndMember in projAndMembers)
+                                    {
+                                        <p>@context.TeamMembers.Find(projAndMember.MemberId).Fullname</p>
+                                    }
                                 </div>
                             </div>
                             <div class="single-item">
@@ -123,7 +112,14 @@
                                     <span>Technologies</span>
                                 </div>
                                 <div class="text">
-                                    <p>Python data science stack, Tesseract</p>
+                                    @{
+                                        var projAndTechs = context.ProjectAndTeches.
+                                            Where(p => p.ProjectId == Model.Id).ToList();
+                                    }
+                                    @foreach (var projectAndTech in projAndTechs)
+                                    {
+                                        <p>@context.Technologies.Find(projectAndTech.TechId).Name</p>
+                                    }
                                 </div>
                             </div>
                             <div class="single-item">
@@ -132,7 +128,7 @@
                                     <span>Time Period</span>
                                 </div>
                                 <div class="text">
-                                    <p>4 Weeks</p>
+                                    <p>@Model.TimePeriod Weeks</p>
                                 </div>
                             </div>
                             <div class="single-item">
@@ -141,7 +137,7 @@
                                     <span>Website</span>
                                 </div>
                                 <div class="text">
-                                    <p><a href="mailto:info@example.com">info@example.com</a></p>
+                                    <p><a href="@Model.Website">@Model.Website</a></p>
                                 </div>
                             </div>
                         </div>
@@ -153,26 +149,65 @@
     <div class="nav-btn-box">
         <div class="auto-container">
             <div class="btn-inner clearfix">
-                <div class="btn-left pull-left">
-                    <div class="prev-btn">
-                        <h4><a href="portfolio-details.html"><i class="fas fa-angle-double-left"></i>&nbsp;Prev Project</a></h4>
+                <!--Index-lemede problem var. Siyahi ile bagli problem var-->
+                @{
+                    var projects = context.Projects;
+                    List<int> projectIds = new List<int>();
+                    foreach (Project project in projects.OrderBy(p => p.Id))
+                    {
+                        projectIds.Add(project.Id);
+                    }
+
+                    int projectIndex = projectIds.IndexOf(Model.Id);
+                    Project previousProject = null;
+                    Project nextProject = null;
+
+                    if (projectIndex > 0)
+                    {
+                        previousProject = projects.Find(projectIds[projectIndex - 1]);
+                    }
+                    if (projectIndex >= 0 && projectIndex < projectIds.Count()-1)
+                    {
+                        nextProject = projects.Find(projectIds[projectIndex + 1]);
+                    }
+                }
+                @if (projectIndex > 0)
+                {
+                    <div class="btn-left pull-left">
+                        <div class="prev-btn">
+                            <h4>
+                                <a asp-controller="Projects" asp-action="Project_Details" asp-route-id="@previousProject.Id">
+                                    <i class="fas fa-angle-double-left"></i>&nbsp;Prev Project
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="box">
+                            <figure class="icon-box">
+                                <img src="~/images/@previousProject.CoverPicture" alt="">
+                            </figure>
+                            <span>@(context.Industries.Find(previousProject.IndustyId).Name)</span>
+                            <h3>@previousProject.Name</h3>
+                        </div>
                     </div>
-                    <div class="box">
-                        <figure class="icon-box"><img src="~/images/icons/icon-8.png" alt=""></figure>
-                        <span>Entertainment</span>
-                        <h3>Automate feedback analysis</h3>
+                }
+                @if (projectIndex >= 0 && projectIndex < projects.Count() - 1)
+                {
+                    <div class="btn-right pull-right text-right">
+                        <div class="prev-btn">
+                            <h4>
+                                <a asp-controller="Projects" asp-action="Project_Details" asp-route-id="@nextProject.Id">
+                                    Next Project&nbsp;
+                                    <i class="fas fa-angle-double-right"></i>
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="box">
+                            <figure class="icon-box"><img src="~/images/@nextProject.CoverPicture" alt=""></figure>
+                            <span>@(context.Industries.Find(nextProject.IndustyId).Name)</span>
+                            <h3>@nextProject.Name</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="btn-right pull-right text-right">
-                    <div class="prev-btn">
-                        <h4><a href="portfolio-details.html">Next Project&nbsp;<i class="fas fa-angle-double-right"></i></a></h4>
-                    </div>
-                    <div class="box">
-                        <figure class="icon-box"><img src="~/images/icons/icon-9.png" alt=""></figure>
-                        <span>Entertainment</span>
-                        <h3>Baby care mobile application</h3>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </div>

@@ -1,0 +1,24 @@
+﻿@model NaxlyAI.Models.ReasonForChoosingU
+@{
+    ViewData["Title"] = ViewData["PageDesc"];
+}
+
+<h3>@ViewData["PageDesc"]</h3>
+<form method="POST">
+    <div class="form-group">
+        <label asp-for="Header">Header</label>
+        <input asp-for="Header" class="form-control form-control-lg" />
+        <span asp-validation-for="Header" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Descrioption">Description</label>
+        <input asp-for="Descrioption" class="form-control form-control-lg" />
+        <span asp-validation-for="Descrioption" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Icon">Icon</label>
+        <input asp-for="Icon" class="form-control form-control-lg" />
+        <span asp-validation-for="Icon" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">@ViewData["Button"]</button>
+</form>

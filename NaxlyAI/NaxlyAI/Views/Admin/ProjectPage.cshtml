@@ -1,0 +1,97 @@
+﻿@model NaxlyAI.Models.ViewModels.ProjectModel
+@{
+    ViewData["Title"] = ViewData["PageDesc"];
+}
+
+<h3>@ViewData["PageDesc"]</h3>
+<form enctype="multipart/form-data" method="POST">
+    <div class="form-group">
+        <label asp-for="Name">Project Name</label>
+        <input asp-for="Name" class="form-control form-control-lg" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ClientId">Choose Client</label>
+        <select asp-for="ClientId" class="custom-select"
+                asp-items="@(new SelectList(new NaxlyAIContext().Clients, nameof(Client.Id),
+    nameof(Client.Name)));"></select>
+        <span asp-validation-for="ClientId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PageHeader">Project Page Header</label>
+        <input asp-for="PageHeader" class="form-control form-control-lg" />
+        <span asp-validation-for="PageHeader" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="IndustyId">Choose Industry</label>
+        <select asp-for="IndustyId" class="custom-select"
+                asp-items="@(new SelectList(new NaxlyAIContext().Industries, nameof(Industry.Id),
+    nameof(Industry.Name)));"></select>
+        <span asp-validation-for="IndustyId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TimePeriod">Project Duration (with weeks)</label>
+        <input type="number" min="1" asp-for="TimePeriod" class="form-control form-control-lg" />
+        <span asp-validation-for="TimePeriod" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Website">Project Website Address</label>
+        <input asp-for="Website" class="form-control form-control-lg" />
+        <span asp-validation-for="Website" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Header">Header</label>
+        <input asp-for="Header" class="form-control form-control-lg" />
+        <span asp-validation-for="Header" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <input asp-for="Description" class="form-control form-control-lg" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Challenge">Challenge in Project</label>
+        <input asp-for="Challenge" class="form-control form-control-lg" />
+        <span asp-validation-for="Challenge" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Solution">Solution in Project</label>
+        <input asp-for="Solution" class="form-control form-control-lg" />
+        <span asp-validation-for="Solution" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CoverPicture">Cover Picture</label>
+        <input asp-for="CoverPicture" class="form-control-file" />
+        <span asp-validation-for="CoverPicture" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PagePicture">Page Picture</label>
+        <input asp-for="PagePicture" class="form-control-file" />
+        <span asp-validation-for="PagePicture" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ProcessDescription">Description of Work Process</label>
+        <input asp-for="ProcessDescription" class="form-control form-control-lg" />
+        <span asp-validation-for="ProcessDescription" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ResultDescription">Description of Result</label>
+        <input asp-for="ResultDescription" class="form-control form-control-lg" />
+        <span asp-validation-for="ResultDescription" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ProjectMembers">Choose Members for Project</label>
+        <select asp-for="ProjectMembers" class="custom-select"
+                asp-items="@(new SelectList(new NaxlyAIContext().TeamMembers, nameof(TeamMember.Id),
+        nameof(TeamMember.Fullname)))" multiple></select>
+        <span asp-validation-for="ProjectMembers" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ProjectTeches">Choose Technologies</label>
+        <select asp-for="ProjectTeches" class="custom-select"
+                asp-items="@(new SelectList(new NaxlyAIContext().Technologies, nameof(Technology.Id),
+        nameof(Technology.Name)))" multiple></select>
+        <span asp-validation-for="ProjectTeches" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">@ViewData["Button"]</button>
+</form>
