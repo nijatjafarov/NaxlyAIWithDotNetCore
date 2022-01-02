@@ -129,13 +129,16 @@
             {
                 @foreach (Project project in Model.Projects)
                 {
+                    Client client = new NaxlyAIContext().Clients.Find(project.ClientId);
+                    Industry industry = new NaxlyAIContext().Industries.Find(project.IndustyId);
+
                     <div class="case-block-two">
                         <div class="inner-box">
                             <figure class="image-box">
                                 <img src="images/@project.CoverPicture" alt="">
                                 <div class="client-box">
-                                    <span>@project.Client.Name</span>
-                                    <div class="client-logo"><img src="images/@project.Client.Logo" alt=""></div>
+                                    <span>@client.Name</span>
+                                    <div class="client-logo"><img src="images/@client.Logo" alt=""></div>
                                 </div>
                                 <div class="link">
                                     <a asp-controller="Projects" asp-action="Project_Details" asp-route-id="@project.Id">
@@ -146,8 +149,8 @@
                             </figure>
                             <div class="lower-content">
                                 <div class="box">
-                                    <div class="icon-box"><i class="@project.Industy.Icon"></i></div>
-                                    <p>@project.Industy.Name</p>
+                                    <div class="icon-box"><i class="@industry.Icon"></i></div>
+                                    <p>@industry.Name</p>
                                     <h4>
                                         <a asp-controller="Projects" asp-action="Project_Details"
                                            asp-route-id="@project.Id">@project.Name</a>

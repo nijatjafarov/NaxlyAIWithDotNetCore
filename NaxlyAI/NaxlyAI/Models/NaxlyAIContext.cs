@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -6,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace NaxlyAI.Models
 {
-    public partial class NaxlyAIContext : DbContext
+    public partial class NaxlyAIContext : IdentityDbContext
     {
         public NaxlyAIContext()
         {
@@ -49,12 +50,14 @@ namespace NaxlyAI.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("data source=DESKTOP-P6NV8LT\\SQLEXPRESS;initial catalog=NaxlyAI;user id=sa;password=Azerbaijan994;");
+                optionsBuilder.UseSqlServer("data source=DESKTOP-P6NV8LT\\SQLEXPRESS;initial catalog=NaxlyAI;Integrated Security=True;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
             modelBuilder.Entity<Project>(entity =>

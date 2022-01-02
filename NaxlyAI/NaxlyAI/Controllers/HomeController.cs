@@ -23,7 +23,8 @@ namespace NaxlyAI.Controllers
                 ReasonsForChoosingUs = context.ReasonForChoosingUs.Take(2),
                 Testimonials = context.Testimonials.Take(3),
                 ClientsFirstRaw = context.Clients.Take(4),
-                ClientsSecondRaw = context.Clients.Skip(4).Take(3)
+                ClientsSecondRaw = context.Clients.Skip(4).Take(3),
+                Projects = context.Projects
             };
 
             return View(home);

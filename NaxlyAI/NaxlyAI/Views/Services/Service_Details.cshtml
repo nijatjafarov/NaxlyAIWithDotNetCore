@@ -174,14 +174,25 @@
                                 {
                                     icon = "icon-7.png";
                                 }
-                                <li>
-                                    <div class="icon-box"><a href="#"><i class="flaticon-download"></i></a></div>
-                                    <div class="box">
-                                        <figure class="image"><img src="~/images/icons/@icon" alt=""></figure>
-                                        <h5>@(file.Name + file.Extention)</h5>
-                                        <span>@file.Size KB</span>
-                                    </div>
-                                </li>
+                            <li>
+                                @{
+                                    var a = new Dictionary<string, string> {
+                                        { "file", (file.Name + file.Extention) },
+                                        { "service", (Model.Service.Name) }
+                                        };
+                                }
+                                <div class="icon-box">
+                                    <a asp-controller="Services" asp-action="DownloadFile"
+                                       asp-all-route-data="a">
+                                        <i class="flaticon-download"></i>
+                                    </a>
+                                </div>
+                                <div class="box">
+                                    <figure class="image"><img src="~/images/icons/@icon" alt=""></figure>
+                                    <h5>@(file.Name + file.Extention)</h5>
+                                    <span>@file.Size KB</span>
+                                </div>
+                            </li>
                             }
                         </ul>
                     </div>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NaxlyAI.Models;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace NaxlyAI.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         NaxlyAIContext context = new NaxlyAIContext();

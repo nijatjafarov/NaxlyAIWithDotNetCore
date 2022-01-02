@@ -1,4 +1,5 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
 @{
     Layout = null;
 }
@@ -36,9 +37,13 @@
                 </ul>
             </div>
             <div>
-                @using (Html.BeginForm("Logout", "Account"))
+                @if (SignInManager.IsSignedIn(User))
                 {
-                    <input type="submit" class="btn btn-danger" value="Logout" onclick="return confirm('Are you sure to quit?')" />
+                    <form asp-controller="Account" asp-action="Logout" method="post">
+                        <button type="submit" class="nav-link btn btn-link py-0" style="width: auto;">
+                            Logout @User.Identity.Name
+                        </button>
+                    </form>
                 }
             </div>
         </div>

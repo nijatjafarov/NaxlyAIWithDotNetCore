@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,7 +28,8 @@ namespace NaxlyAI
                 options.EnableEndpointRouting = false;
             });
             services.AddDbContext<NaxlyAIContext>(options => options.
-            UseSqlServer("data source=DESKTOP-P6NV8LT\\SQLEXPRESS;initial catalog=NaxlyAI;user id=sa;password=Azerbaijan994;"));
+            UseSqlServer("data source=DESKTOP-P6NV8LT\\SQLEXPRESS;initial catalog=NaxlyAI;Integrated Security=True;"));
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<NaxlyAIContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,60 +39,15 @@ namespace NaxlyAI
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            //Default file adlari: index.html, index.htm, default.html, default.htm
+            else
+            {
+                app.UseStatusCodePages();
+            }
 
             app.UseRouting();
-
-            /*DefaultFilesOptions defaultFilesOptions = new DefaultFilesOptions();
-            defaultFilesOptions.DefaultFileNames.Clear();
-            defaultFilesOptions.DefaultFileNames.Add("second.html");
-
-            //DefaultFiles StaticFiles-den evvel gelmelidir.
-            app.UseDefaultFiles(defaultFilesOptions);*/
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
-
-
-            //FileServerOptions fileServerOptions = new FileServerOptions();
-            //fileServerOptions.DefaultFilesOptions.DefaultFileNames.Clear();
-            //fileServerOptions.DefaultFilesOptions.DefaultFileNames.Add("second.html");
-
-            //Bu middleware yuxaridaki ikisini ve ustelik useDirectoryBrowser-i de evez edir
-            
-            //app.UseFileServer(fileServerOptions);
-            
-
-           /* app.Use(async (context, next) =>
-            {
-                logger.LogInformation("MW1: Incoming request");
-                await next();
-                logger.LogInformation("MW1: Outgoing response");
-            });
-
-            app.Use(async (context, next) =>
-            {
-                logger.LogInformation("MW2: Incoming request");
-                await next();
-                logger.LogInformation("MW2: Outgoing response");
-            });
-*/
-            app.Run(async context =>
-            {
-                //logger.LogInformation("MW3: Incoming request");
-                await context.Response.WriteAsync("MW3");
-                //logger.LogInformation("MW3: Outgoing response");
-            });
-
-            /*app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context =>
-                {
-                    logger.LogInformation("MW3: Incoming request");
-                    await context.Response.WriteAsync("MW3");
-                    logger.LogInformation("MW3: Outgoing response");
-                });
-            });*/
         }
     }
 }
